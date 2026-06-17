@@ -15,7 +15,7 @@ body {
   background: #00040a;
 }
 
-/* FONDO IA 20100 */
+/* FONDO IA FUTURISTA */
 .futuro {
   position: fixed;
   inset: 0;
@@ -345,7 +345,7 @@ button:active {
 }
 
 .video-ai::before {
-  content: "0101  AI  API  CLOUD  CODE  20100  NEURAL  SYSTEM";
+  content: "AI  API  CLOUD  CODE  NEURAL  SYSTEM  HOLOGRAM  CENTENO AI";
   position: absolute;
   left: -80%;
   top: 18px;
