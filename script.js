@@ -8,32 +8,32 @@ function mostrarSorpresa() {
       <div class="mini-planeta p3"></div>
 
       <div class="escena escena1">
-        ⚡ IA 20100 ACTIVADA ⚡
+        ⚡ IA DEL FUTURO ACTIVADA ⚡
       </div>
 
       <div class="escena escena2">
         Guido Americo Centeno Colque<br>
-        fundador en construcción.
+        fundador de una nueva era tecnológica.
       </div>
 
       <div class="escena escena3">
         No persigo atención.<br>
-        Desarrollo tecnología.
+        Construyo sistemas inteligentes.
       </div>
 
       <div class="escena escena4">
-        CENTENO AI será mi sistema,<br>
-        mi marca y mi futuro 🚀
+        CENTENO AI será mi marca,<br>
+        mi visión y mi tecnología avanzada 🚀
       </div>
 
       <div class="escena escena5">
-        Código. APIs. Automatización.<br>
-        Inteligencia artificial. Disciplina.
+        Hologramas. APIs. Automatización.<br>
+        Inteligencia artificial. Código. Disciplina.
       </div>
 
       <div class="escena escena6">
         Mi mente ya no vive en el pasado.<br>
-        Mi mente construye el año 20100.
+        Mi mente diseña tecnología del futuro.
       </div>
 
       <div class="escena escena7">
