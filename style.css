@@ -12,20 +12,33 @@ body {
   align-items: center;
   padding: 20px;
   overflow-x: hidden;
-  background: #02030a;
+  background: #00040a;
 }
 
-/* FONDO UNIVERSO */
-.universo {
+/* FONDO IA 20100 */
+.futuro {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 70, 120, 0.18), transparent 25%),
-    radial-gradient(circle at 80% 15%, rgba(80, 160, 255, 0.18), transparent 22%),
-    radial-gradient(circle at 50% 90%, rgba(170, 70, 255, 0.20), transparent 30%),
-    linear-gradient(135deg, #02030a, #070b22, #18061f, #03040c);
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.20), transparent 24%),
+    radial-gradient(circle at 80% 15%, rgba(120, 80, 255, 0.24), transparent 24%),
+    radial-gradient(circle at 50% 90%, rgba(0, 255, 150, 0.18), transparent 30%),
+    linear-gradient(135deg, #00040a, #020b1f, #100020, #001414);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
+  transform: perspective(600px) rotateX(62deg) translateY(140px);
+  transform-origin: bottom;
+  animation: gridMover 4s linear infinite;
+  opacity: 0.55;
 }
 
 .estrellas {
@@ -33,146 +46,192 @@ body {
   inset: 0;
   background-image:
     radial-gradient(white 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
-    radial-gradient(rgba(255,210,230,0.9) 1.5px, transparent 1.5px);
-  background-size: 60px 60px, 95px 95px, 140px 140px;
+    radial-gradient(rgba(0,255,255,0.9) 1px, transparent 1px),
+    radial-gradient(rgba(180,120,255,0.9) 1.5px, transparent 1.5px);
+  background-size: 70px 70px, 110px 110px, 150px 150px;
   background-position: 0 0, 30px 40px, 80px 20px;
-  animation: moverEstrellas 30s linear infinite;
-  opacity: 0.75;
-}
-
-.estrella-fugaz {
-  position: absolute;
-  width: 160px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, white, transparent);
-  top: 12%;
-  left: -180px;
-  transform: rotate(-22deg);
-  animation: fugaz 6s infinite ease-in-out;
+  animation: moverEstrellas 25s linear infinite;
   opacity: 0.8;
 }
 
-/* PLANETAS FLOTANDO */
-.planeta {
+.rayo {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(0.1px);
+  width: 220px;
+  height: 2px;
+  top: 13%;
+  left: -240px;
+  background: linear-gradient(90deg, transparent, #00ffff, white, transparent);
+  box-shadow: 0 0 20px #00ffff;
+  transform: rotate(-20deg);
+  animation: rayoFuturo 5s infinite ease-in-out;
 }
 
-.planeta::after {
+/* PLANETAS HOLOGRÁFICOS */
+.holo-planeta {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.holo-planeta::after {
   content: "";
   position: absolute;
-  left: -22%;
+  left: -28%;
   top: 42%;
-  width: 145%;
-  height: 22%;
-  border: 2px solid rgba(255,255,255,0.45);
+  width: 155%;
+  height: 24%;
+  border: 2px solid rgba(0,255,255,0.55);
   border-radius: 50%;
   transform: rotate(-18deg);
-  box-shadow: 0 0 18px rgba(255,255,255,0.25);
+  box-shadow: 0 0 22px rgba(0,255,255,0.45);
 }
 
-.planeta-1 {
-  width: 155px;
-  height: 155px;
-  top: 7%;
-  right: -35px;
+.planeta-a {
+  width: 160px;
+  height: 160px;
+  top: 6%;
+  right: -45px;
   background:
-    radial-gradient(circle at 30% 25%, #fff, #ffd6df 16%, #ff4d6d 45%, #5b1028 82%);
-  box-shadow: 0 0 45px rgba(255, 80, 120, 0.65);
-  animation: flotar1 7s ease-in-out infinite, girarColor 12s linear infinite;
+    radial-gradient(circle at 30% 25%, #ffffff, #00ffff 17%, #0066ff 48%, #00102e 84%);
+  box-shadow:
+    0 0 45px rgba(0,255,255,0.75),
+    inset 0 0 25px rgba(255,255,255,0.18);
+  animation: flotarA 7s ease-in-out infinite, colorAI 12s linear infinite;
 }
 
-.planeta-2 {
+.planeta-b {
   width: 95px;
   height: 95px;
   left: -25px;
   bottom: 18%;
   background:
-    radial-gradient(circle at 35% 30%, #fff, #9bdcff 18%, #3977ff 52%, #07164a 85%);
-  box-shadow: 0 0 35px rgba(80, 160, 255, 0.6);
-  animation: flotar2 8s ease-in-out infinite, girarColor 10s linear infinite;
+    radial-gradient(circle at 35% 30%, #ffffff, #b78cff 18%, #7a1fff 52%, #160033 85%);
+  box-shadow: 0 0 38px rgba(150,80,255,0.75);
+  animation: flotarB 8s ease-in-out infinite;
 }
 
-.planeta-3 {
+.planeta-c {
   width: 70px;
   height: 70px;
   left: 12%;
   top: 10%;
   background:
-    radial-gradient(circle at 35% 25%, #fff7d8, #ffc75f 25%, #ff7a1a 58%, #451000 88%);
-  box-shadow: 0 0 30px rgba(255, 170, 70, 0.6);
-  animation: flotar3 6s ease-in-out infinite;
+    radial-gradient(circle at 35% 25%, #ffffff, #00ff99 25%, #007a55 58%, #002318 88%);
+  box-shadow: 0 0 32px rgba(0,255,150,0.70);
+  animation: flotarC 6s ease-in-out infinite;
 }
 
-.planeta-4 {
-  width: 55px;
-  height: 55px;
-  right: 18%;
-  bottom: 7%;
-  background:
-    radial-gradient(circle at 35% 25%, #fff, #d7b4ff 20%, #9b5cff 52%, #23003d 88%);
-  box-shadow: 0 0 28px rgba(170, 90, 255, 0.65);
-  animation: flotar4 9s ease-in-out infinite;
+/* CHIPS FLOTANTES */
+.chip {
+  position: fixed;
+  z-index: 1;
+  padding: 10px 14px;
+  border-radius: 14px;
+  color: #00ffff;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 2px;
+  border: 1px solid rgba(0,255,255,0.45);
+  background: rgba(0, 20, 35, 0.42);
+  box-shadow: 0 0 22px rgba(0,255,255,0.35);
+  backdrop-filter: blur(10px);
 }
 
-/* TARJETA */
+.chip-1 {
+  top: 22%;
+  left: 8%;
+  animation: chipFloat 5s infinite ease-in-out;
+}
+
+.chip-2 {
+  bottom: 18%;
+  right: 10%;
+  animation: chipFloat 6s infinite ease-in-out;
+}
+
+.chip-3 {
+  top: 16%;
+  right: 22%;
+  animation: chipFloat 7s infinite ease-in-out;
+}
+
+/* TARJETA PRINCIPAL */
 .card {
   width: 100%;
-  max-width: 450px;
-  padding: 34px 25px;
-  border-radius: 32px;
+  max-width: 470px;
+  padding: 36px 25px;
+  border-radius: 34px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(0, 18, 30, 0.54);
   box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.8),
-    0 0 45px rgba(255, 77, 109, 0.20);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+    0 25px 90px rgba(0, 0, 0, 0.85),
+    0 0 55px rgba(0, 255, 255, 0.22);
+  border: 1px solid rgba(0, 255, 255, 0.32);
   backdrop-filter: blur(18px);
   animation: aparecer 1.2s ease;
   position: relative;
   z-index: 2;
 }
 
-.corazon-principal {
-  width: 74px;
-  height: 74px;
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(0,255,255,0.25), transparent, rgba(180,80,255,0.18));
+  opacity: 0.55;
+}
+
+.nucleo-ai {
+  width: 78px;
+  height: 78px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  background: rgba(255, 77, 109, 0.20);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  box-shadow: 0 0 34px rgba(255, 77, 109, 0.65);
-  animation: latido 1.8s infinite;
+  color: #001018;
+  font-size: 25px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #00ffff, #ffffff, #7bffdf);
+  box-shadow:
+    0 0 35px rgba(0,255,255,0.85),
+    0 0 70px rgba(0,255,255,0.35);
+  animation: pulsoAI 1.8s infinite;
+  position: relative;
+  z-index: 2;
 }
 
 .mini {
   font-size: 12px;
   letter-spacing: 2.3px;
   text-transform: uppercase;
-  color: #ffc2cf;
-  margin-bottom: 8px;
+  color: #7dffff;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
 }
 
 h1 {
   font-size: 34px;
-  margin: 8px 0 20px;
+  margin: 8px 0 22px;
+  line-height: 1.18;
+  position: relative;
+  z-index: 2;
 }
 
 .nombre-marco {
   margin: 16px auto 22px;
-  padding: 18px 14px;
-  border-radius: 26px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,77,109,0.18), rgba(255,255,255,0.08));
-  border: 1px solid rgba(255, 210, 220, 0.42);
+  padding: 20px 14px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(0,255,255,0.13), rgba(120,80,255,0.18), rgba(255,255,255,0.08));
+  border: 1px solid rgba(0, 255, 255, 0.45);
   box-shadow:
-    0 0 32px rgba(255, 77, 109, 0.35),
-    inset 0 0 20px rgba(255, 255, 255, 0.08);
+    0 0 35px rgba(0, 255, 255, 0.30),
+    inset 0 0 22px rgba(255,255,255,0.08);
   position: relative;
   overflow: hidden;
+  z-index: 2;
 }
 
 .nombre-marco::before {
@@ -182,52 +241,54 @@ h1 {
   left: -120%;
   width: 80%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
-  animation: luzPasando 3.5s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50), transparent);
+  animation: luzPasando 3.2s infinite;
 }
 
 .corona {
   display: block;
-  font-size: 26px;
-  margin-bottom: 5px;
+  font-size: 34px;
+  margin-bottom: 6px;
   animation: flotarCorona 2.5s infinite ease-in-out;
 }
 
 .nombre-ultra {
-  font-size: 42px;
+  font-size: 56px;
   font-weight: 900;
   line-height: 1;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #ffffff, #ffe1e8, #ff4d6d, #ffd6df, #ffffff);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #ffffff, #00ffff, #7bffdf, #8d6cff, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(255, 90, 130, 0.85));
+  filter: drop-shadow(0 0 22px rgba(0,255,255,0.90));
   animation: latidoNombre 2.2s infinite ease-in-out;
 }
 
 .apellido-ultra {
-  margin-top: 6px;
-  font-size: 25px;
-  font-weight: 800;
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 900;
   letter-spacing: 2px;
-  color: #ffd6df;
-  text-shadow: 0 0 18px rgba(255, 120, 150, 0.75);
+  color: #7dffff;
+  text-shadow: 0 0 20px rgba(0,255,255,0.85);
 }
 
 .frase-nombre {
   margin: 12px 0 0;
   font-size: 15px;
   line-height: 1.5;
-  color: #ffeef2;
+  color: #d8ffff;
 }
 
 .frase {
   font-size: 21px;
   line-height: 1.55;
-  color: #ffe0e7;
+  color: #d8ffff;
   font-weight: bold;
-  margin: 20px 0;
-  text-shadow: 0 0 22px rgba(255, 120, 150, 0.45);
+  margin: 22px 0;
+  text-shadow: 0 0 22px rgba(0,255,255,0.35);
+  position: relative;
+  z-index: 2;
 }
 
 .mensaje {
@@ -235,6 +296,8 @@ h1 {
   line-height: 1.7;
   color: #f0f0f0;
   margin: 14px 0;
+  position: relative;
+  z-index: 2;
 }
 
 button {
@@ -242,12 +305,14 @@ button {
   border: none;
   padding: 16px 25px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ff3f6c, #ff8fa3);
-  color: white;
+  background: linear-gradient(135deg, #00ffff, #ffffff, #7bffdf);
+  color: #001018;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 12px 38px rgba(255, 77, 109, 0.55);
+  box-shadow: 0 12px 45px rgba(0,255,255,0.55);
+  position: relative;
+  z-index: 2;
 }
 
 button:active {
@@ -256,76 +321,87 @@ button:active {
 
 .sorpresa {
   margin-top: 24px;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #ffd6df;
   min-height: 70px;
+  position: relative;
+  z-index: 2;
 }
 
-/* VIDEO AL TOCAR BOTÓN */
-.video-romantico {
+/* VIDEO IA FUTURO */
+.video-ai {
   position: relative;
-  min-height: 390px;
+  min-height: 430px;
   margin-top: 25px;
   overflow: hidden;
   border-radius: 30px;
   padding: 28px 18px;
   background:
-    radial-gradient(circle at 50% 25%, rgba(255, 220, 235, 0.25), transparent 24%),
-    radial-gradient(circle at 15% 80%, rgba(255, 77, 109, 0.22), transparent 28%),
-    linear-gradient(135deg, #01030d, #111827, #2a0d1f);
-  border: 1px solid rgba(255, 210, 230, 0.35);
+    radial-gradient(circle at 50% 25%, rgba(0, 255, 255, 0.25), transparent 24%),
+    radial-gradient(circle at 15% 80%, rgba(130, 80, 255, 0.22), transparent 28%),
+    linear-gradient(135deg, #000712, #071827, #160029);
+  border: 1px solid rgba(0, 255, 255, 0.38);
   box-shadow:
-    0 0 45px rgba(255, 77, 109, 0.30),
-    inset 0 0 38px rgba(255, 255, 255, 0.07);
+    0 0 55px rgba(0,255,255,0.32),
+    inset 0 0 45px rgba(255,255,255,0.07);
 }
 
-.video-romantico .mini-planeta {
+.video-ai::before {
+  content: "0101  AI  API  CLOUD  CODE  20100  NEURAL  SYSTEM";
+  position: absolute;
+  left: -80%;
+  top: 18px;
+  width: 260%;
+  color: rgba(0,255,255,0.36);
+  font-size: 13px;
+  letter-spacing: 6px;
+  animation: codigoMover 10s linear infinite;
+}
+
+.video-ai .mini-planeta {
   position: absolute;
   border-radius: 50%;
 }
 
-.video-romantico .p1 {
-  width: 105px;
-  height: 105px;
-  top: 28px;
+.video-ai .p1 {
+  width: 120px;
+  height: 120px;
+  top: 42px;
   left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(circle at 30% 25%, #fff, #ffd6df 18%, #ff4d6d 48%, #5b1028 82%);
-  box-shadow: 0 0 35px rgba(255,100,140,0.9);
-  animation: planetaCentro 5s infinite ease-in-out;
+  background: radial-gradient(circle at 30% 25%, #fff, #00ffff 18%, #0066ff 48%, #00102e 82%);
+  box-shadow: 0 0 42px rgba(0,255,255,0.95);
+  animation: planetaCentro 5s infinite ease-in-out, colorAI 8s linear infinite;
 }
 
-.video-romantico .p1::after {
+.video-ai .p1::after {
   content: "";
   position: absolute;
-  top: 42px;
-  left: -20px;
-  width: 145px;
-  height: 30px;
-  border: 3px solid rgba(255, 230, 240, 0.75);
+  top: 48px;
+  left: -24px;
+  width: 168px;
+  height: 34px;
+  border: 3px solid rgba(0,255,255,0.78);
   border-radius: 50%;
   transform: rotate(-18deg);
-  box-shadow: 0 0 18px rgba(255, 210, 230, 0.60);
+  box-shadow: 0 0 22px rgba(0,255,255,0.70);
 }
 
-.video-romantico .p2 {
-  width: 45px;
-  height: 45px;
-  top: 60px;
-  right: 35px;
-  background: radial-gradient(circle at 30% 25%, #fff, #8ddcff, #265bff);
-  box-shadow: 0 0 22px rgba(90,170,255,0.8);
+.video-ai .p2 {
+  width: 48px;
+  height: 48px;
+  top: 82px;
+  right: 38px;
+  background: radial-gradient(circle at 30% 25%, #fff, #b78cff, #7a1fff);
+  box-shadow: 0 0 24px rgba(160,90,255,0.85);
   animation: orbitar 8s infinite linear;
 }
 
-.video-romantico .p3 {
-  width: 35px;
-  height: 35px;
-  top: 110px;
-  left: 38px;
-  background: radial-gradient(circle at 30% 25%, #fff, #ffc75f, #ff6b00);
-  box-shadow: 0 0 18px rgba(255,170,70,0.8);
+.video-ai .p3 {
+  width: 38px;
+  height: 38px;
+  top: 138px;
+  left: 40px;
+  background: radial-gradient(circle at 30% 25%, #fff, #00ff99, #007a55);
+  box-shadow: 0 0 18px rgba(0,255,150,0.85);
   animation: orbitar2 9s infinite linear;
 }
 
@@ -334,14 +410,14 @@ button:active {
   position: absolute;
   left: 18px;
   right: 18px;
-  top: 190px;
+  top: 225px;
   font-size: 20px;
   line-height: 1.55;
-  font-weight: 800;
-  color: #ffe4eb;
+  font-weight: 900;
+  color: #d8ffff;
   text-shadow:
-    0 0 16px rgba(255, 120, 160, 0.90),
-    0 0 35px rgba(255, 77, 109, 0.50);
+    0 0 16px rgba(0,255,255,0.90),
+    0 0 35px rgba(0,180,255,0.50);
   animation: escenaVideoPro 28s infinite;
 }
 
@@ -364,41 +440,46 @@ button:active {
   to { transform: translateY(-160px); }
 }
 
-@keyframes fugaz {
-  0% { left: -200px; top: 16%; opacity: 0; }
+@keyframes gridMover {
+  from { background-position: 0 0; }
+  to { background-position: 0 42px; }
+}
+
+@keyframes rayoFuturo {
+  0% { left: -240px; top: 14%; opacity: 0; }
   15% { opacity: 1; }
-  35% { left: 120%; top: 35%; opacity: 0; }
+  35% { left: 120%; top: 36%; opacity: 0; }
   100% { left: 120%; opacity: 0; }
 }
 
-@keyframes flotar1 {
+@keyframes flotarA {
   0%,100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(22px) rotate(4deg); }
 }
 
-@keyframes flotar2 {
+@keyframes flotarB {
   0%,100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(-5deg); }
 }
 
-@keyframes flotar3 {
+@keyframes flotarC {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(18px); }
 }
 
-@keyframes flotar4 {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
-}
-
-@keyframes girarColor {
+@keyframes colorAI {
   from { filter: hue-rotate(0deg); }
   to { filter: hue-rotate(360deg); }
 }
 
-@keyframes latido {
+@keyframes chipFloat {
+  0%,100% { transform: translateY(0); opacity: 0.75; }
+  50% { transform: translateY(-16px); opacity: 1; }
+}
+
+@keyframes pulsoAI {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.09); }
+  50% { transform: scale(1.10); }
 }
 
 @keyframes luzPasando {
@@ -408,8 +489,8 @@ button:active {
 }
 
 @keyframes latidoNombre {
-  0%,100% { transform: scale(1); filter: drop-shadow(0 0 13px rgba(255,90,130,0.60)); }
-  50% { transform: scale(1.04); filter: drop-shadow(0 0 25px rgba(255,120,160,0.95)); }
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 13px rgba(0,255,255,0.65)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 30px rgba(0,255,255,1)); }
 }
 
 @keyframes flotarCorona {
@@ -436,6 +517,11 @@ button:active {
   50% { transform: translate(170px, 5px); }
   75% { transform: translate(85px, 45px); }
   100% { transform: translate(0, 0); }
+}
+
+@keyframes codigoMover {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
 }
 
 @keyframes escenaVideoPro {
