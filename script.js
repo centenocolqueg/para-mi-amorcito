@@ -2,43 +2,43 @@ function mostrarSorpresa() {
   const sorpresa = document.getElementById("sorpresa");
 
   sorpresa.innerHTML = `
-    <div class="video-romantico">
+    <div class="video-ai">
       <div class="mini-planeta p1"></div>
       <div class="mini-planeta p2"></div>
       <div class="mini-planeta p3"></div>
 
       <div class="escena escena1">
-        ✨ Alexandra Cuti Hancco ✨
+        ⚡ IA 20100 ACTIVADA ⚡
       </div>
 
       <div class="escena escena2">
-        En este universo enorme,<br>
-        tu nombre brilla diferente ❤️
+        Guido Americo Centeno Colque<br>
+        fundador en construcción.
       </div>
 
       <div class="escena escena3">
-        Este detalle lo hice pensando solo en ti...
+        No persigo atención.<br>
+        Desarrollo tecnología.
       </div>
 
       <div class="escena escena4">
-        Porque para mí no eres una persona más,<br>
-        eres única y especial 🥺🌹
+        CENTENO AI será mi sistema,<br>
+        mi marca y mi futuro 🚀
       </div>
 
       <div class="escena escena5">
-        Me gusta verte sonreír,<br>
-        me gusta cuando estás tranquila<br>
-        y cuando nos cuidamos bonito ❤️
+        Código. APIs. Automatización.<br>
+        Inteligencia artificial. Disciplina.
       </div>
 
       <div class="escena escena6">
-        Alexandra, tu nombre merece brillar<br>
-        como una estrella en mi corazón ✨
+        Mi mente ya no vive en el pasado.<br>
+        Mi mente construye el año 20100.
       </div>
 
       <div class="escena escena7">
-        Eres mi amorcita especial,<br>
-        mi personita bonita ❤️✨
+        CEO DE MI PROPIA VIDA<br>
+        AMERICO AI ⚡👑
       </div>
     </div>
   `;
