@@ -4,7 +4,7 @@ function mostrarSorpresa() {
   sorpresa.innerHTML = `
     <div class="video-romantico">
       <div class="escena escena1">
-        Alexandra Cuti Hancco ✨
+        ✨ Alexandra Cuti Hancco ✨
       </div>
 
       <div class="escena escena2">
