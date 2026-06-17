@@ -2,18 +2,38 @@ function mostrarSorpresa() {
   const sorpresa = document.getElementById("sorpresa");
 
   sorpresa.innerHTML = `
-    ✨ Alexandra Cuti Hancco ✨<br><br>
+    <div class="video-romantico">
+      <div class="escena escena1">
+        Alexandra Cuti Hancco ✨
+      </div>
 
-    Este detalle lo hice pensando solo en ti,
-    porque para mí no eres una persona más:
-    eres única, especial y muy bonita para mi vida. ❤️<br><br>
+      <div class="escena escena2">
+        Este detalle lo hice pensando solo en ti ❤️
+      </div>
 
-    Me gusta verte sonreír, me gusta cuando estás tranquila
-    y me gusta cuando nos cuidamos con cariño. 🥺<br><br>
+      <div class="escena escena3">
+        Para mí no eres una persona más...
+      </div>
 
-    Tu nombre merece verse bonito aquí,
-    porque tú también tienes un lugar bonito en mi corazón. 🌹<br><br>
+      <div class="escena escena4">
+        Eres única, especial y muy bonita para mi vida 🥺🌹
+      </div>
 
-    Eres mi amorcita especial, Alexandra. ❤️✨
+      <div class="escena escena5">
+        Me gusta verte sonreír,<br>
+        me gusta cuando estás tranquila<br>
+        y cuando nos cuidamos bonito ❤️
+      </div>
+
+      <div class="escena escena6">
+        Tu nombre merece brillar aquí,<br>
+        porque tienes un lugar bonito en mi corazón ✨
+      </div>
+
+      <div class="escena escena7">
+        Eres mi amorcita especial,<br>
+        Alexandra ❤️✨
+      </div>
+    </div>
   `;
 }
