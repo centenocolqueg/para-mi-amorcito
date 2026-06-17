@@ -6,28 +6,129 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 80, 120, 0.28), transparent 26%),
-    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.13), transparent 24%),
-    radial-gradient(circle at 50% 90%, rgba(255, 77, 109, 0.18), transparent 28%),
-    linear-gradient(135deg, #030303, #111111, #2a2a2a);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
   overflow-x: hidden;
+  background: #02030a;
 }
 
+/* FONDO UNIVERSO */
+.universo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 70, 120, 0.18), transparent 25%),
+    radial-gradient(circle at 80% 15%, rgba(80, 160, 255, 0.18), transparent 22%),
+    radial-gradient(circle at 50% 90%, rgba(170, 70, 255, 0.20), transparent 30%),
+    linear-gradient(135deg, #02030a, #070b22, #18061f, #03040c);
+}
+
+.estrellas {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+    radial-gradient(rgba(255,210,230,0.9) 1.5px, transparent 1.5px);
+  background-size: 60px 60px, 95px 95px, 140px 140px;
+  background-position: 0 0, 30px 40px, 80px 20px;
+  animation: moverEstrellas 30s linear infinite;
+  opacity: 0.75;
+}
+
+.estrella-fugaz {
+  position: absolute;
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  top: 12%;
+  left: -180px;
+  transform: rotate(-22deg);
+  animation: fugaz 6s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+/* PLANETAS FLOTANDO */
+.planeta {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.1px);
+}
+
+.planeta::after {
+  content: "";
+  position: absolute;
+  left: -22%;
+  top: 42%;
+  width: 145%;
+  height: 22%;
+  border: 2px solid rgba(255,255,255,0.45);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+  box-shadow: 0 0 18px rgba(255,255,255,0.25);
+}
+
+.planeta-1 {
+  width: 155px;
+  height: 155px;
+  top: 7%;
+  right: -35px;
+  background:
+    radial-gradient(circle at 30% 25%, #fff, #ffd6df 16%, #ff4d6d 45%, #5b1028 82%);
+  box-shadow: 0 0 45px rgba(255, 80, 120, 0.65);
+  animation: flotar1 7s ease-in-out infinite, girarColor 12s linear infinite;
+}
+
+.planeta-2 {
+  width: 95px;
+  height: 95px;
+  left: -25px;
+  bottom: 18%;
+  background:
+    radial-gradient(circle at 35% 30%, #fff, #9bdcff 18%, #3977ff 52%, #07164a 85%);
+  box-shadow: 0 0 35px rgba(80, 160, 255, 0.6);
+  animation: flotar2 8s ease-in-out infinite, girarColor 10s linear infinite;
+}
+
+.planeta-3 {
+  width: 70px;
+  height: 70px;
+  left: 12%;
+  top: 10%;
+  background:
+    radial-gradient(circle at 35% 25%, #fff7d8, #ffc75f 25%, #ff7a1a 58%, #451000 88%);
+  box-shadow: 0 0 30px rgba(255, 170, 70, 0.6);
+  animation: flotar3 6s ease-in-out infinite;
+}
+
+.planeta-4 {
+  width: 55px;
+  height: 55px;
+  right: 18%;
+  bottom: 7%;
+  background:
+    radial-gradient(circle at 35% 25%, #fff, #d7b4ff 20%, #9b5cff 52%, #23003d 88%);
+  box-shadow: 0 0 28px rgba(170, 90, 255, 0.65);
+  animation: flotar4 9s ease-in-out infinite;
+}
+
+/* TARJETA */
 .card {
   width: 100%;
-  max-width: 440px;
+  max-width: 450px;
   padding: 34px 25px;
   border-radius: 32px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.095);
-  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(255, 77, 109, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(18px);
   animation: aparecer 1.2s ease;
   position: relative;
@@ -44,7 +145,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 36px;
-  box-shadow: 0 0 34px rgba(255, 77, 109, 0.50);
+  box-shadow: 0 0 34px rgba(255, 77, 109, 0.65);
   animation: latido 1.8s infinite;
 }
 
@@ -59,23 +160,17 @@ body {
 h1 {
   font-size: 34px;
   margin: 8px 0 20px;
-  letter-spacing: 0.5px;
 }
 
 .nombre-marco {
   margin: 16px auto 22px;
   padding: 18px 14px;
   border-radius: 26px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.13),
-    rgba(255, 77, 109, 0.16),
-    rgba(255, 255, 255, 0.07)
-  );
-  border: 1px solid rgba(255, 210, 220, 0.38);
+  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,77,109,0.18), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255, 210, 220, 0.42);
   box-shadow:
-    0 0 28px rgba(255, 77, 109, 0.30),
-    inset 0 0 18px rgba(255, 255, 255, 0.08);
+    0 0 32px rgba(255, 77, 109, 0.35),
+    inset 0 0 20px rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -87,13 +182,8 @@ h1 {
   left: -120%;
   width: 80%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
-  animation: luzPasando 3.8s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
+  animation: luzPasando 3.5s infinite;
 }
 
 .corona {
@@ -111,7 +201,7 @@ h1 {
   background: linear-gradient(135deg, #ffffff, #ffe1e8, #ff4d6d, #ffd6df, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 16px rgba(255, 90, 130, 0.75));
+  filter: drop-shadow(0 0 18px rgba(255, 90, 130, 0.85));
   animation: latidoNombre 2.2s infinite ease-in-out;
 }
 
@@ -121,7 +211,7 @@ h1 {
   font-weight: 800;
   letter-spacing: 2px;
   color: #ffd6df;
-  text-shadow: 0 0 18px rgba(255, 120, 150, 0.65);
+  text-shadow: 0 0 18px rgba(255, 120, 150, 0.75);
 }
 
 .frase-nombre {
@@ -137,7 +227,7 @@ h1 {
   color: #ffe0e7;
   font-weight: bold;
   margin: 20px 0;
-  text-shadow: 0 0 22px rgba(255, 120, 150, 0.35);
+  text-shadow: 0 0 22px rgba(255, 120, 150, 0.45);
 }
 
 .mensaje {
@@ -157,7 +247,7 @@ button {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 12px 38px rgba(255, 77, 109, 0.46);
+  box-shadow: 0 12px 38px rgba(255, 77, 109, 0.55);
 }
 
 button:active {
@@ -172,69 +262,71 @@ button:active {
   min-height: 70px;
 }
 
-.decoracion span {
-  position: fixed;
-  font-size: 28px;
-  opacity: 0.25;
-  animation: flotar 7s infinite ease-in-out;
-  z-index: 1;
-}
-
-.decoracion span:nth-child(1) { left: 9%; top: 14%; }
-.decoracion span:nth-child(2) { left: 15%; bottom: 12%; animation-delay: 1s; }
-.decoracion span:nth-child(3) { right: 12%; top: 17%; animation-delay: 2s; }
-.decoracion span:nth-child(4) { right: 18%; bottom: 15%; animation-delay: 3s; }
-.decoracion span:nth-child(5) { left: 48%; top: 7%; animation-delay: 4s; }
-.decoracion span:nth-child(6) { right: 44%; bottom: 7%; animation-delay: 5s; }
-.decoracion span:nth-child(7) { left: 5%; top: 55%; animation-delay: 2.5s; }
-.decoracion span:nth-child(8) { right: 6%; top: 60%; animation-delay: 3.5s; }
-
+/* VIDEO AL TOCAR BOTÓN */
 .video-romantico {
   position: relative;
-  min-height: 360px;
+  min-height: 390px;
   margin-top: 25px;
   overflow: hidden;
   border-radius: 30px;
   padding: 28px 18px;
   background:
-    radial-gradient(circle at 50% 22%, rgba(255, 220, 235, 0.25), transparent 24%),
+    radial-gradient(circle at 50% 25%, rgba(255, 220, 235, 0.25), transparent 24%),
     radial-gradient(circle at 15% 80%, rgba(255, 77, 109, 0.22), transparent 28%),
-    linear-gradient(135deg, #020202, #10131f, #2a0d1f);
+    linear-gradient(135deg, #01030d, #111827, #2a0d1f);
   border: 1px solid rgba(255, 210, 230, 0.35);
   box-shadow:
     0 0 45px rgba(255, 77, 109, 0.30),
     inset 0 0 38px rgba(255, 255, 255, 0.07);
 }
 
-.video-romantico::before {
-  content: "";
+.video-romantico .mini-planeta {
   position: absolute;
-  top: 28px;
-  left: 50%;
-  width: 105px;
-  height: 105px;
-  transform: translateX(-50%);
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 25%, #ffffff, #ffd6df 18%, #ff4d6d 48%, #5b1028 82%);
-  box-shadow:
-    0 0 30px rgba(255, 100, 140, 0.90),
-    0 0 80px rgba(255, 77, 109, 0.45);
-  animation: planetaFlotando 4s infinite ease-in-out, planetaGirando 8s infinite linear;
 }
 
-.video-romantico::after {
+.video-romantico .p1 {
+  width: 105px;
+  height: 105px;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 30% 25%, #fff, #ffd6df 18%, #ff4d6d 48%, #5b1028 82%);
+  box-shadow: 0 0 35px rgba(255,100,140,0.9);
+  animation: planetaCentro 5s infinite ease-in-out;
+}
+
+.video-romantico .p1::after {
   content: "";
   position: absolute;
-  top: 72px;
-  left: 50%;
+  top: 42px;
+  left: -20px;
   width: 145px;
-  height: 34px;
-  transform: translateX(-50%) rotate(-18deg);
+  height: 30px;
   border: 3px solid rgba(255, 230, 240, 0.75);
   border-radius: 50%;
+  transform: rotate(-18deg);
   box-shadow: 0 0 18px rgba(255, 210, 230, 0.60);
-  animation: anilloBrillo 3s infinite ease-in-out;
+}
+
+.video-romantico .p2 {
+  width: 45px;
+  height: 45px;
+  top: 60px;
+  right: 35px;
+  background: radial-gradient(circle at 30% 25%, #fff, #8ddcff, #265bff);
+  box-shadow: 0 0 22px rgba(90,170,255,0.8);
+  animation: orbitar 8s infinite linear;
+}
+
+.video-romantico .p3 {
+  width: 35px;
+  height: 35px;
+  top: 110px;
+  left: 38px;
+  background: radial-gradient(circle at 30% 25%, #fff, #ffc75f, #ff6b00);
+  box-shadow: 0 0 18px rgba(255,170,70,0.8);
+  animation: orbitar2 9s infinite linear;
 }
 
 .escena {
@@ -242,14 +334,14 @@ button:active {
   position: absolute;
   left: 18px;
   right: 18px;
-  top: 175px;
+  top: 190px;
   font-size: 20px;
   line-height: 1.55;
   font-weight: 800;
   color: #ffe4eb;
   text-shadow:
-    0 0 16px rgba(255, 120, 160, 0.80),
-    0 0 35px rgba(255, 77, 109, 0.40);
+    0 0 16px rgba(255, 120, 160, 0.90),
+    0 0 35px rgba(255, 77, 109, 0.50);
   animation: escenaVideoPro 28s infinite;
 }
 
@@ -261,116 +353,95 @@ button:active {
 .escena6 { animation-delay: 20s; font-size: 18px; }
 .escena7 { animation-delay: 24s; font-size: 23px; color: #ffffff; }
 
+/* ANIMACIONES */
 @keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(28px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes flotar {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-26px) rotate(8deg);
-  }
+@keyframes moverEstrellas {
+  from { transform: translateY(0); }
+  to { transform: translateY(-160px); }
+}
+
+@keyframes fugaz {
+  0% { left: -200px; top: 16%; opacity: 0; }
+  15% { opacity: 1; }
+  35% { left: 120%; top: 35%; opacity: 0; }
+  100% { left: 120%; opacity: 0; }
+}
+
+@keyframes flotar1 {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(22px) rotate(4deg); }
+}
+
+@keyframes flotar2 {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(-5deg); }
+}
+
+@keyframes flotar3 {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(18px); }
+}
+
+@keyframes flotar4 {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes girarColor {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
 }
 
 @keyframes latido {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.09);
-  }
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.09); }
 }
 
 @keyframes luzPasando {
-  0% {
-    left: -120%;
-  }
-  55% {
-    left: 130%;
-  }
-  100% {
-    left: 130%;
-  }
+  0% { left: -120%; }
+  55% { left: 130%; }
+  100% { left: 130%; }
 }
 
 @keyframes latidoNombre {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 13px rgba(255, 90, 130, 0.60));
-  }
-  50% {
-    transform: scale(1.04);
-    filter: drop-shadow(0 0 25px rgba(255, 120, 160, 0.95));
-  }
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 13px rgba(255,90,130,0.60)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 25px rgba(255,120,160,0.95)); }
 }
 
 @keyframes flotarCorona {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
-@keyframes planetaFlotando {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-12px);
-  }
+@keyframes planetaCentro {
+  0%,100% { transform: translateX(-50%) translateY(0) scale(1); }
+  50% { transform: translateX(-50%) translateY(-12px) scale(1.04); }
 }
 
-@keyframes planetaGirando {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
+@keyframes orbitar {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-80px, 40px); }
+  50% { transform: translate(-160px, 0); }
+  75% { transform: translate(-80px, -35px); }
+  100% { transform: translate(0, 0); }
 }
 
-@keyframes anilloBrillo {
-  0%, 100% {
-    opacity: 0.65;
-  }
-  50% {
-    opacity: 1;
-  }
+@keyframes orbitar2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(85px, -35px); }
+  50% { transform: translate(170px, 5px); }
+  75% { transform: translate(85px, 45px); }
+  100% { transform: translate(0, 0); }
 }
 
 @keyframes escenaVideoPro {
-  0% {
-    opacity: 0;
-    transform: translateY(22px) scale(0.96);
-    filter: blur(4px);
-  }
-  6% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-  14% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-  20% {
-    opacity: 0;
-    transform: translateY(-22px) scale(1.04);
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 0;
-  }
+  0% { opacity: 0; transform: translateY(22px) scale(0.96); filter: blur(4px); }
+  6% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  14% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  20% { opacity: 0; transform: translateY(-22px) scale(1.04); filter: blur(4px); }
+  100% { opacity: 0; }
 }
