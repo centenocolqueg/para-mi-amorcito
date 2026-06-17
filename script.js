@@ -3,20 +3,26 @@ function mostrarSorpresa() {
 
   sorpresa.innerHTML = `
     <div class="video-romantico">
+      <div class="mini-planeta p1"></div>
+      <div class="mini-planeta p2"></div>
+      <div class="mini-planeta p3"></div>
+
       <div class="escena escena1">
         ✨ Alexandra Cuti Hancco ✨
       </div>
 
       <div class="escena escena2">
-        Este detalle lo hice pensando solo en ti ❤️
+        En este universo enorme,<br>
+        tu nombre brilla diferente ❤️
       </div>
 
       <div class="escena escena3">
-        Para mí no eres una persona más...
+        Este detalle lo hice pensando solo en ti...
       </div>
 
       <div class="escena escena4">
-        Eres única, especial y muy bonita para mi vida 🥺🌹
+        Porque para mí no eres una persona más,<br>
+        eres única y especial 🥺🌹
       </div>
 
       <div class="escena escena5">
@@ -26,13 +32,13 @@ function mostrarSorpresa() {
       </div>
 
       <div class="escena escena6">
-        Tu nombre merece brillar aquí,<br>
-        porque tienes un lugar bonito en mi corazón ✨
+        Alexandra, tu nombre merece brillar<br>
+        como una estrella en mi corazón ✨
       </div>
 
       <div class="escena escena7">
         Eres mi amorcita especial,<br>
-        Alexandra ❤️✨
+        mi personita bonita ❤️✨
       </div>
     </div>
   `;
