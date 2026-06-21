@@ -15,19 +15,21 @@ body {
   background: #00040a;
 }
 
-/* FONDO IA FUTURISTA */
+/* FONDO TECNOLOGÍA FUTURISTA — CREADO SOLO CON CÓDIGO */
 .futuro {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.20), transparent 24%),
-    radial-gradient(circle at 80% 15%, rgba(120, 80, 255, 0.24), transparent 24%),
-    radial-gradient(circle at 50% 90%, rgba(0, 255, 150, 0.18), transparent 30%),
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.25), transparent 24%),
+    radial-gradient(circle at 80% 15%, rgba(120, 80, 255, 0.28), transparent 24%),
+    radial-gradient(circle at 50% 90%, rgba(0, 255, 150, 0.22), transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 35%),
     linear-gradient(135deg, #00040a, #020b1f, #100020, #001414);
 }
 
+/* GRID TIPO TECNOLOGÍA */
 .grid {
   position: absolute;
   inset: 0;
@@ -35,12 +37,13 @@ body {
     linear-gradient(rgba(0, 255, 255, 0.12) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 42px 42px;
-  transform: perspective(600px) rotateX(62deg) translateY(140px);
+  transform: perspective(650px) rotateX(62deg) translateY(150px);
   transform-origin: bottom;
   animation: gridMover 4s linear infinite;
   opacity: 0.55;
 }
 
+/* ESTRELLAS */
 .estrellas {
   position: absolute;
   inset: 0;
@@ -51,72 +54,120 @@ body {
   background-size: 70px 70px, 110px 110px, 150px 150px;
   background-position: 0 0, 30px 40px, 80px 20px;
   animation: moverEstrellas 25s linear infinite;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
+/* NEBULOSAS */
+.nebulosa {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(45px);
+  opacity: 0.55;
+}
+
+.nebulosa-1 {
+  width: 460px;
+  height: 460px;
+  left: -120px;
+  top: 18%;
+  background: rgba(0, 255, 255, 0.28);
+  animation: nebulosaMover1 12s infinite ease-in-out;
+}
+
+.nebulosa-2 {
+  width: 520px;
+  height: 520px;
+  right: -160px;
+  bottom: 8%;
+  background: rgba(150, 70, 255, 0.28);
+  animation: nebulosaMover2 14s infinite ease-in-out;
+}
+
+/* RAYO FUTURISTA */
 .rayo {
   position: absolute;
-  width: 220px;
+  width: 240px;
   height: 2px;
   top: 13%;
-  left: -240px;
+  left: -260px;
   background: linear-gradient(90deg, transparent, #00ffff, white, transparent);
-  box-shadow: 0 0 20px #00ffff;
+  box-shadow: 0 0 24px #00ffff;
   transform: rotate(-20deg);
   animation: rayoFuturo 5s infinite ease-in-out;
 }
 
-/* PLANETAS HOLOGRÁFICOS */
-.holo-planeta {
+/* PLANETAS REALISTAS CREADOS CON CSS */
+.planeta-real {
   position: absolute;
   border-radius: 50%;
+  overflow: visible;
 }
 
-.holo-planeta::after {
+.planeta-real::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255,255,255,0.95), transparent 12%),
+    radial-gradient(circle at 65% 70%, rgba(0,0,0,0.36), transparent 30%),
+    linear-gradient(135deg, rgba(255,255,255,0.16), transparent);
+  mix-blend-mode: screen;
+}
+
+.planeta-real::after {
   content: "";
   position: absolute;
   left: -28%;
   top: 42%;
-  width: 155%;
+  width: 156%;
   height: 24%;
-  border: 2px solid rgba(0,255,255,0.55);
+  border: 2px solid rgba(0,255,255,0.62);
   border-radius: 50%;
   transform: rotate(-18deg);
-  box-shadow: 0 0 22px rgba(0,255,255,0.45);
-}
-
-.planeta-a {
-  width: 160px;
-  height: 160px;
-  top: 6%;
-  right: -45px;
-  background:
-    radial-gradient(circle at 30% 25%, #ffffff, #00ffff 17%, #0066ff 48%, #00102e 84%);
   box-shadow:
-    0 0 45px rgba(0,255,255,0.75),
-    inset 0 0 25px rgba(255,255,255,0.18);
-  animation: flotarA 7s ease-in-out infinite, colorAI 12s linear infinite;
+    0 0 22px rgba(0,255,255,0.55),
+    inset 0 0 12px rgba(255,255,255,0.25);
 }
 
-.planeta-b {
-  width: 95px;
-  height: 95px;
-  left: -25px;
+.planeta-grande {
+  width: 190px;
+  height: 190px;
+  top: 6%;
+  right: -55px;
+  background:
+    radial-gradient(circle at 35% 28%, #ffffff 0%, #9ffcff 12%, #0077ff 38%, #00113d 76%, #000714 100%);
+  box-shadow:
+    0 0 55px rgba(0,255,255,0.85),
+    0 0 120px rgba(0,90,255,0.35),
+    inset -30px -25px 45px rgba(0,0,0,0.55);
+  animation: flotarA 7s ease-in-out infinite, colorAI 13s linear infinite;
+}
+
+.planeta-mediano {
+  width: 115px;
+  height: 115px;
+  left: -30px;
   bottom: 18%;
   background:
-    radial-gradient(circle at 35% 30%, #ffffff, #b78cff 18%, #7a1fff 52%, #160033 85%);
-  box-shadow: 0 0 38px rgba(150,80,255,0.75);
+    radial-gradient(circle at 35% 30%, #ffffff 0%, #d5b6ff 14%, #7a1fff 50%, #160033 86%);
+  box-shadow:
+    0 0 42px rgba(150,80,255,0.80),
+    0 0 90px rgba(120,40,255,0.25),
+    inset -22px -18px 34px rgba(0,0,0,0.55);
   animation: flotarB 8s ease-in-out infinite;
 }
 
-.planeta-c {
-  width: 70px;
-  height: 70px;
+.planeta-pequeno {
+  width: 78px;
+  height: 78px;
   left: 12%;
   top: 10%;
   background:
-    radial-gradient(circle at 35% 25%, #ffffff, #00ff99 25%, #007a55 58%, #002318 88%);
-  box-shadow: 0 0 32px rgba(0,255,150,0.70);
+    radial-gradient(circle at 35% 25%, #ffffff 0%, #00ff99 25%, #007a55 58%, #002318 88%);
+  box-shadow:
+    0 0 36px rgba(0,255,150,0.75),
+    inset -16px -14px 24px rgba(0,0,0,0.55);
   animation: flotarC 6s ease-in-out infinite;
 }
 
@@ -154,18 +205,24 @@ body {
   animation: chipFloat 7s infinite ease-in-out;
 }
 
+.chip-4 {
+  bottom: 30%;
+  left: 12%;
+  animation: chipFloat 8s infinite ease-in-out;
+}
+
 /* TARJETA PRINCIPAL */
 .card {
   width: 100%;
-  max-width: 470px;
+  max-width: 480px;
   padding: 36px 25px;
   border-radius: 34px;
   text-align: center;
-  background: rgba(0, 18, 30, 0.54);
+  background: rgba(0, 18, 30, 0.56);
   box-shadow:
     0 25px 90px rgba(0, 0, 0, 0.85),
-    0 0 55px rgba(0, 255, 255, 0.22);
-  border: 1px solid rgba(0, 255, 255, 0.32);
+    0 0 60px rgba(0, 255, 255, 0.24);
+  border: 1px solid rgba(0, 255, 255, 0.34);
   backdrop-filter: blur(18px);
   animation: aparecer 1.2s ease;
   position: relative;
@@ -178,13 +235,14 @@ body {
   inset: 0;
   border-radius: 34px;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(0,255,255,0.25), transparent, rgba(180,80,255,0.18));
+  background:
+    linear-gradient(135deg, rgba(0,255,255,0.24), transparent, rgba(180,80,255,0.18));
   opacity: 0.55;
 }
 
 .nucleo-ai {
-  width: 78px;
-  height: 78px;
+  width: 80px;
+  height: 80px;
   margin: 0 auto 14px;
   border-radius: 50%;
   display: flex;
@@ -195,8 +253,8 @@ body {
   font-weight: 900;
   background: linear-gradient(135deg, #00ffff, #ffffff, #7bffdf);
   box-shadow:
-    0 0 35px rgba(0,255,255,0.85),
-    0 0 70px rgba(0,255,255,0.35);
+    0 0 35px rgba(0,255,255,0.90),
+    0 0 75px rgba(0,255,255,0.38);
   animation: pulsoAI 1.8s infinite;
   position: relative;
   z-index: 2;
@@ -224,10 +282,11 @@ h1 {
   margin: 16px auto 22px;
   padding: 20px 14px;
   border-radius: 28px;
-  background: linear-gradient(135deg, rgba(0,255,255,0.13), rgba(120,80,255,0.18), rgba(255,255,255,0.08));
+  background:
+    linear-gradient(135deg, rgba(0,255,255,0.13), rgba(120,80,255,0.18), rgba(255,255,255,0.08));
   border: 1px solid rgba(0, 255, 255, 0.45);
   box-shadow:
-    0 0 35px rgba(0, 255, 255, 0.30),
+    0 0 35px rgba(0, 255, 255, 0.32),
     inset 0 0 22px rgba(255,255,255,0.08);
   position: relative;
   overflow: hidden;
@@ -300,23 +359,64 @@ h1 {
   z-index: 2;
 }
 
-button {
-  margin-top: 25px;
+/* BOTONES */
+.zona-botones {
+  margin-top: 28px;
+  position: relative;
+  z-index: 5;
+}
+
+.boton-principal {
+  width: 100%;
+  max-width: 340px;
   border: none;
-  padding: 16px 25px;
+  padding: 17px 26px;
   border-radius: 999px;
   background: linear-gradient(135deg, #00ffff, #ffffff, #7bffdf);
   color: #001018;
   font-size: 16px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 12px 45px rgba(0,255,255,0.55);
-  position: relative;
-  z-index: 2;
+  box-shadow:
+    0 0 25px rgba(0,255,255,0.80),
+    0 0 60px rgba(0,120,255,0.35);
 }
 
-button:active {
-  transform: scale(0.97);
+.botones-secundarios {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 11px;
+}
+
+.botones-secundarios button {
+  width: 100%;
+  border: 1px solid rgba(0,255,255,0.45);
+  padding: 13px 18px;
+  border-radius: 18px;
+  background: rgba(0, 20, 35, 0.55);
+  color: #dfffff;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  box-shadow:
+    0 0 18px rgba(0,255,255,0.25),
+    inset 0 0 18px rgba(255,255,255,0.05);
+  transition: 0.25s ease;
+}
+
+.botones-secundarios button:active,
+.boton-principal:active {
+  transform: scale(0.96);
+}
+
+.botones-secundarios button:hover {
+  background: rgba(0,255,255,0.14);
+  box-shadow:
+    0 0 28px rgba(0,255,255,0.45),
+    inset 0 0 20px rgba(255,255,255,0.08);
 }
 
 .sorpresa {
@@ -326,10 +426,10 @@ button:active {
   z-index: 2;
 }
 
-/* VIDEO IA FUTURO */
+/* VIDEO IA */
 .video-ai {
   position: relative;
-  min-height: 430px;
+  min-height: 460px;
   margin-top: 25px;
   overflow: hidden;
   border-radius: 30px;
@@ -342,6 +442,7 @@ button:active {
   box-shadow:
     0 0 55px rgba(0,255,255,0.32),
     inset 0 0 45px rgba(255,255,255,0.07);
+  animation: entradaVideo 1s ease forwards, camaraMovimiento 10s infinite ease-in-out;
 }
 
 .video-ai::before {
@@ -356,29 +457,78 @@ button:active {
   animation: codigoMover 10s linear infinite;
 }
 
+.video-ai::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05),
+      transparent 8%,
+      transparent 92%,
+      rgba(0,0,0,0.45)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.035) 0px,
+      rgba(255,255,255,0.035) 1px,
+      transparent 2px,
+      transparent 5px
+    );
+  opacity: 0.45;
+  animation: scanVideo 4s linear infinite;
+}
+
+.barra-video {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+  z-index: 5;
+}
+
+.barra-video::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffff, #ffffff, #7bffdf);
+  box-shadow: 0 0 18px rgba(0,255,255,0.9);
+  animation: progresoVideo 28s linear infinite;
+}
+
 .video-ai .mini-planeta {
   position: absolute;
   border-radius: 50%;
 }
 
 .video-ai .p1 {
-  width: 120px;
-  height: 120px;
-  top: 42px;
+  width: 125px;
+  height: 125px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(circle at 30% 25%, #fff, #00ffff 18%, #0066ff 48%, #00102e 82%);
-  box-shadow: 0 0 42px rgba(0,255,255,0.95);
+  background:
+    radial-gradient(circle at 30% 25%, #fff, #00ffff 18%, #0066ff 48%, #00102e 82%);
+  box-shadow:
+    0 0 45px rgba(0,255,255,0.95),
+    inset -22px -18px 35px rgba(0,0,0,0.55);
   animation: planetaCentro 5s infinite ease-in-out, colorAI 8s linear infinite;
 }
 
 .video-ai .p1::after {
   content: "";
   position: absolute;
-  top: 48px;
-  left: -24px;
-  width: 168px;
-  height: 34px;
+  top: 50px;
+  left: -26px;
+  width: 176px;
+  height: 36px;
   border: 3px solid rgba(0,255,255,0.78);
   border-radius: 50%;
   transform: rotate(-18deg);
@@ -386,9 +536,9 @@ button:active {
 }
 
 .video-ai .p2 {
-  width: 48px;
-  height: 48px;
-  top: 82px;
+  width: 50px;
+  height: 50px;
+  top: 92px;
   right: 38px;
   background: radial-gradient(circle at 30% 25%, #fff, #b78cff, #7a1fff);
   box-shadow: 0 0 24px rgba(160,90,255,0.85);
@@ -396,13 +546,45 @@ button:active {
 }
 
 .video-ai .p3 {
-  width: 38px;
-  height: 38px;
-  top: 138px;
+  width: 40px;
+  height: 40px;
+  top: 148px;
   left: 40px;
   background: radial-gradient(circle at 30% 25%, #fff, #00ff99, #007a55);
   box-shadow: 0 0 18px rgba(0,255,150,0.85);
   animation: orbitar2 9s infinite linear;
+}
+
+.hud {
+  position: absolute;
+  z-index: 4;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(0,255,255,0.9);
+  border: 1px solid rgba(0,255,255,0.35);
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: rgba(0,20,35,0.35);
+  box-shadow: 0 0 16px rgba(0,255,255,0.25);
+}
+
+.hud-1 {
+  top: 18px;
+  left: 18px;
+  animation: hudParpadeo 2s infinite;
+}
+
+.hud-2 {
+  top: 18px;
+  right: 18px;
+  animation: hudParpadeo 2.5s infinite;
+}
+
+.hud-3 {
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: hudParpadeo 3s infinite;
 }
 
 .escena {
@@ -410,7 +592,7 @@ button:active {
   position: absolute;
   left: 18px;
   right: 18px;
-  top: 225px;
+  top: 245px;
   font-size: 20px;
   line-height: 1.55;
   font-weight: 900;
@@ -445,8 +627,18 @@ button:active {
   to { background-position: 0 42px; }
 }
 
+@keyframes nebulosaMover1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, 30px) scale(1.12); }
+}
+
+@keyframes nebulosaMover2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-80px, -30px) scale(1.12); }
+}
+
 @keyframes rayoFuturo {
-  0% { left: -240px; top: 14%; opacity: 0; }
+  0% { left: -260px; top: 14%; opacity: 0; }
   15% { opacity: 1; }
   35% { left: 120%; top: 36%; opacity: 0; }
   100% { left: 120%; opacity: 0; }
@@ -498,6 +690,31 @@ button:active {
   50% { transform: translateY(-6px); }
 }
 
+@keyframes entradaVideo {
+  from { opacity: 0; transform: scale(0.92); filter: blur(8px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes camaraMovimiento {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+}
+
+@keyframes scanVideo {
+  from { background-position: 0 0; }
+  to { background-position: 0 80px; }
+}
+
+@keyframes progresoVideo {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes hudParpadeo {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
 @keyframes planetaCentro {
   0%,100% { transform: translateX(-50%) translateY(0) scale(1); }
   50% { transform: translateX(-50%) translateY(-12px) scale(1.04); }
@@ -530,4 +747,33 @@ button:active {
   14% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
   20% { opacity: 0; transform: translateY(-22px) scale(1.04); filter: blur(4px); }
   100% { opacity: 0; }
+}
+
+@media (min-width: 520px) {
+  .botones-secundarios {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 29px;
+  }
+
+  .nombre-ultra {
+    font-size: 48px;
+  }
+
+  .card {
+    padding: 30px 20px;
+  }
+
+  .planeta-grande {
+    width: 140px;
+    height: 140px;
+  }
+
+  .escena {
+    font-size: 18px;
+  }
 }
