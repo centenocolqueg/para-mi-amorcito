@@ -7,25 +7,25 @@ body {
   min-height: 100vh;
   font-family: Arial, sans-serif;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0,255,255,0.16), transparent 25%),
-    radial-gradient(circle at 80% 15%, rgba(255,70,70,0.16), transparent 25%),
-    linear-gradient(135deg, #020611, #090918, #150707);
+    radial-gradient(circle at 20% 20%, rgba(0,255,255,0.18), transparent 25%),
+    radial-gradient(circle at 80% 20%, rgba(255,60,60,0.18), transparent 25%),
+    linear-gradient(135deg, #020611, #090918, #160606);
   color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 18px;
+  justify-content: center;
+  padding: 16px;
 }
 
 .game-wrapper {
   width: 100%;
-  max-width: 900px;
+  max-width: 950px;
 }
 
 .top-panel {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   align-items: center;
   margin-bottom: 14px;
   padding: 18px;
@@ -41,14 +41,13 @@ body {
   font-size: 12px;
   letter-spacing: 2px;
   color: #00f7ff;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 h1 {
-  margin: 5px 0 0;
-  font-size: 32px;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #ffffff, #00f7ff, #ffd166, #ffffff);
+  margin: 6px 0 0;
+  font-size: 34px;
+  background: linear-gradient(135deg, #fff, #00f7ff, #ffd166, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -56,9 +55,9 @@ h1 {
 .stats {
   display: grid;
   gap: 6px;
-  font-size: 14px;
-  color: #e9ffff;
   text-align: right;
+  color: #e9ffff;
+  font-size: 14px;
 }
 
 .stats span {
@@ -66,59 +65,57 @@ h1 {
   font-weight: 900;
 }
 
-.game {
+.arena {
   position: relative;
-  width: 100%;
-  height: 500px;
+  height: 520px;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 30px;
   background:
-    radial-gradient(circle at 50% 18%, rgba(0,255,255,0.24), transparent 25%),
-    radial-gradient(circle at 90% 10%, rgba(255,209,102,0.15), transparent 20%),
-    linear-gradient(180deg, #061326 0%, #07111e 48%, #09080d 100%);
-  border: 1px solid rgba(0,255,255,0.26);
+    radial-gradient(circle at 50% 18%, rgba(0,255,255,0.22), transparent 24%),
+    radial-gradient(circle at 80% 20%, rgba(255,209,102,0.12), transparent 20%),
+    linear-gradient(180deg, #061326, #07111e 55%, #050508);
+  border: 1px solid rgba(0,255,255,0.28);
   box-shadow:
-    0 25px 70px rgba(0,0,0,0.65),
+    0 25px 80px rgba(0,0,0,0.72),
     0 0 55px rgba(0,255,255,0.12);
-}
-
-.sky-glow {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, transparent, rgba(0,255,255,0.08), transparent),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.03) 0px,
-      rgba(255,255,255,0.03) 1px,
-      transparent 3px,
-      transparent 8px
-    );
-  animation: scan 5s linear infinite;
-  z-index: 2;
-  pointer-events: none;
 }
 
 .stars {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(rgba(0,255,255,0.9) 1px, transparent 1px),
+    radial-gradient(rgba(255,209,102,0.8) 1.5px, transparent 1.5px);
+  background-size: 70px 70px, 110px 110px, 150px 150px;
+  animation: starMove 26s linear infinite;
+  opacity: 0.7;
 }
 
-.star {
+.grid {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 8px white;
-  animation: twinkle 3s infinite ease-in-out;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.10) 1px, transparent 1px);
+  background-size: 46px 46px;
+  transform: perspective(650px) rotateX(68deg) translateY(230px);
+  transform-origin: bottom;
+  animation: gridMove 5s linear infinite;
+  opacity: 0.45;
 }
 
 .planet {
   position: absolute;
+  width: 170px;
+  height: 170px;
+  top: 45px;
+  right: 70px;
   border-radius: 50%;
-  z-index: 1;
+  background:
+    radial-gradient(circle at 30% 25%, #fff, #00f7ff 18%, #156dff 50%, #061a48 90%);
+  box-shadow: 0 0 48px rgba(0,255,255,0.45);
+  animation: planetFloat 8s infinite ease-in-out;
 }
 
 .planet::after {
@@ -131,410 +128,305 @@ h1 {
   border: 2px solid rgba(0,255,255,0.45);
   border-radius: 50%;
   transform: rotate(-18deg);
-  box-shadow: 0 0 18px rgba(0,255,255,0.35);
 }
 
-.planet-1 {
-  width: 150px;
-  height: 150px;
-  top: 40px;
-  right: 70px;
-  background:
-    radial-gradient(circle at 30% 25%, #ffffff, #00f7ff 18%, #156dff 50%, #061a48 90%);
-  box-shadow: 0 0 45px rgba(0,255,255,0.45);
-  animation: planetFloat 8s infinite ease-in-out;
-}
-
-.planet-2 {
-  width: 80px;
-  height: 80px;
-  top: 90px;
-  left: 90px;
-  background:
-    radial-gradient(circle at 30% 25%, #ffffff, #ffd166 22%, #ff3434 60%, #230404 100%);
-  box-shadow: 0 0 35px rgba(255,80,80,0.35);
-  animation: planetFloat2 7s infinite ease-in-out;
-}
-
-.mountains {
+.fighter {
   position: absolute;
-  left: 0;
-  width: 200%;
-  bottom: 100px;
-  height: 170px;
-  z-index: 3;
-  clip-path: polygon(
-    0% 100%, 5% 50%, 11% 100%, 17% 35%, 24% 100%,
-    32% 45%, 40% 100%, 48% 38%, 58% 100%,
-    66% 42%, 75% 100%, 84% 45%, 92% 100%, 100% 55%, 100% 100%
-  );
+  bottom: 90px;
+  width: 88px;
+  height: 160px;
+  z-index: 5;
+  transition: 0.25s ease;
 }
 
-.mountains-back {
-  background: rgba(0, 247, 255, 0.12);
-  animation: bgMove 18s linear infinite;
-  opacity: 0.75;
+.ceo {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.mountains-front {
-  height: 130px;
-  bottom: 95px;
-  background: rgba(255, 209, 102, 0.12);
-  animation: bgMove 11s linear infinite;
+.enemy1 {
+  left: 110px;
 }
 
-.city {
+.enemy2 {
+  right: 110px;
+}
+
+.fighter .head {
   position: absolute;
-  bottom: 92px;
-  width: 200%;
-  height: 140px;
-  z-index: 4;
-  background:
-    linear-gradient(to top, rgba(0,0,0,0.55), transparent),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,255,255,0.16) 0px,
-      rgba(0,255,255,0.16) 22px,
-      transparent 22px,
-      transparent 42px
-    );
-  clip-path: polygon(
-    0 100%, 0 50%, 5% 50%, 5% 25%, 9% 25%, 9% 60%, 14% 60%,
-    14% 32%, 18% 32%, 18% 70%, 23% 70%, 23% 40%, 27% 40%,
-    27% 100%, 100% 100%, 100% 100%
-  );
-}
-
-.city-1 {
-  animation: bgMove 8s linear infinite;
-}
-
-.city-2 {
-  opacity: 0.45;
-  transform: translateX(50%);
-  animation: bgMove 8s linear infinite;
-}
-
-.ground {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 200%;
-  height: 95px;
-  z-index: 8;
-  background:
-    linear-gradient(180deg, #131313, #050505),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,255,255,0.22) 0px,
-      rgba(0,255,255,0.22) 40px,
-      transparent 40px,
-      transparent 80px
-    );
-  border-top: 3px solid rgba(0,255,255,0.45);
-  box-shadow: 0 -10px 28px rgba(0,255,255,0.12);
-  animation: roadMove 1.2s linear infinite;
-}
-
-.road-line {
-  position: absolute;
-  top: 42px;
-  left: 0;
-  width: 200%;
-  height: 6px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #ffd166 0px,
-      #ffd166 55px,
-      transparent 55px,
-      transparent 95px
-    );
-  opacity: 0.85;
-  animation: roadLine 0.8s linear infinite;
-}
-
-/* PERSONA CORRIENDO */
-.runner {
-  position: absolute;
-  left: 100px;
-  bottom: 92px;
-  width: 70px;
-  height: 130px;
-  z-index: 10;
-  transition: bottom 0.18s ease-out;
-}
-
-.runner.jump {
-  animation: jumpAnim 0.72s ease-out;
-}
-
-.head {
-  position: absolute;
-  left: 24px;
-  top: 4px;
-  width: 28px;
-  height: 28px;
+  left: 29px;
+  top: 2px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 25%, #ffffff, #ffd6b0 35%, #b66a3c 100%);
+    radial-gradient(circle at 30% 25%, #fff, #ffd1a3 35%, #a85b32 100%);
   box-shadow: 0 0 16px rgba(255,209,102,0.45);
 }
 
-.head::after {
+.enemy .head {
+  background:
+    radial-gradient(circle at 30% 25%, #fff, #ff7171 30%, #5b0505 100%);
+}
+
+.fighter .head::after {
   content: "";
   position: absolute;
   left: 18px;
-  top: 9px;
-  width: 10px;
+  top: 10px;
+  width: 12px;
   height: 4px;
+  border-radius: 6px;
   background: #00f7ff;
-  border-radius: 8px;
   box-shadow: 0 0 10px #00f7ff;
 }
 
 .body {
   position: absolute;
-  left: 27px;
-  top: 35px;
-  width: 20px;
-  height: 50px;
-  border-radius: 14px;
-  background:
-    linear-gradient(180deg, #ff2b2b, #5a0808);
-  box-shadow:
-    0 0 16px rgba(255,43,43,0.55),
-    inset 0 0 10px rgba(255,255,255,0.14);
+  left: 31px;
+  top: 38px;
+  width: 28px;
+  height: 62px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ff2b2b, #5a0808);
+  box-shadow: 0 0 18px rgba(255,43,43,0.45);
 }
 
-.glow-core {
+.ceo .body {
+  background: linear-gradient(180deg, #ffd166, #ff2b2b, #4a0606);
+  box-shadow:
+    0 0 20px rgba(255,209,102,0.45),
+    0 0 22px rgba(0,247,255,0.25);
+}
+
+.core {
   position: absolute;
-  left: 33px;
-  top: 50px;
-  width: 9px;
-  height: 9px;
+  left: 39px;
+  top: 58px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   background: #00f7ff;
   box-shadow:
-    0 0 10px #00f7ff,
-    0 0 22px rgba(0,255,255,0.8);
+    0 0 12px #00f7ff,
+    0 0 28px rgba(0,255,255,0.85);
+  z-index: 2;
 }
 
-.arm, .leg {
+.arm,
+.leg {
   position: absolute;
-  width: 10px;
+  width: 11px;
   border-radius: 999px;
   transform-origin: top center;
 }
 
 .arm {
-  top: 40px;
-  height: 42px;
+  top: 44px;
+  height: 52px;
   background: linear-gradient(180deg, #ffd166, #b66a00);
 }
 
+.enemy .arm {
+  background: linear-gradient(180deg, #ff4444, #660707);
+}
+
 .arm-left {
-  left: 24px;
-  animation: armLeftRun 0.42s infinite linear;
+  left: 25px;
+  transform: rotate(30deg);
 }
 
 .arm-right {
-  left: 43px;
-  animation: armRightRun 0.42s infinite linear;
+  left: 54px;
+  transform: rotate(-30deg);
 }
 
 .leg {
-  top: 80px;
-  height: 52px;
+  top: 96px;
+  height: 60px;
   background: linear-gradient(180deg, #00f7ff, #0057ff);
-  box-shadow: 0 0 10px rgba(0,255,255,0.35);
+}
+
+.enemy .leg {
+  background: linear-gradient(180deg, #ff4444, #5b0505);
 }
 
 .leg-left {
-  left: 27px;
-  animation: legLeftRun 0.42s infinite linear;
+  left: 31px;
+  transform: rotate(15deg);
 }
 
 .leg-right {
-  left: 42px;
-  animation: legRightRun 0.42s infinite linear;
+  left: 49px;
+  transform: rotate(-15deg);
 }
 
-.obstacle {
+.name {
   position: absolute;
-  right: -70px;
-  bottom: 92px;
-  width: 45px;
-  height: 70px;
-  z-index: 9;
-  border-radius: 10px 10px 4px 4px;
-  background:
-    linear-gradient(180deg, #ff2b2b, #560707);
-  box-shadow:
-    0 0 18px rgba(255,43,43,0.75),
-    inset 0 0 10px rgba(255,255,255,0.10);
-}
-
-.obstacle::before {
-  content: "!";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffd166;
+  left: 50%;
+  top: -28px;
+  transform: translateX(-50%);
+  font-size: 11px;
   font-weight: 900;
-  font-size: 28px;
+  color: #dfffff;
+  background: rgba(0,20,35,0.55);
+  border: 1px solid rgba(0,255,255,0.25);
+  padding: 5px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
-.energy {
+.aura {
   position: absolute;
-  right: -80px;
-  bottom: 210px;
-  width: 42px;
-  height: 42px;
-  z-index: 9;
+  left: 50%;
+  top: 20px;
+  width: 135px;
+  height: 135px;
+  transform: translateX(-50%);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,255,255,0.20);
-  border: 1px solid rgba(0,255,255,0.55);
-  box-shadow: 0 0 22px rgba(0,255,255,0.75);
-  font-size: 24px;
+  border: 2px solid rgba(0,255,255,0.25);
+  box-shadow:
+    0 0 28px rgba(0,255,255,0.35),
+    inset 0 0 25px rgba(0,255,255,0.12);
+  animation: auraPulse 2s infinite ease-in-out;
 }
 
-.start-screen,
+.ceo.attack {
+  transform: translateX(-50%) scale(1.08);
+}
+
+.ceo.blocking .aura {
+  border-color: rgba(255,209,102,0.9);
+  box-shadow:
+    0 0 35px rgba(255,209,102,0.75),
+    inset 0 0 30px rgba(255,209,102,0.20);
+}
+
+.enemy.hit {
+  filter: brightness(1.7);
+  transform: translateY(-12px) scale(0.95);
+}
+
+.ceo.hit {
+  filter: brightness(1.6);
+}
+
+.enemy.defeated {
+  opacity: 0.25;
+  transform: translateY(80px) rotate(18deg);
+}
+
+.effect {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: radial-gradient(circle, white, #00f7ff, transparent 70%);
+  box-shadow: 0 0 50px rgba(0,255,255,0.9);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.effect.show {
+  animation: boom 0.45s ease-out;
+}
+
+.message {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 15;
+  color: #001018;
+  font-weight: 900;
+  background: linear-gradient(135deg, #00f7ff, #fff, #ffd166);
+  padding: 12px 20px;
+  border-radius: 999px;
+  box-shadow: 0 0 28px rgba(0,255,255,0.45);
+}
+
 .game-over {
   position: absolute;
   inset: 0;
-  z-index: 20;
-  background: rgba(0, 4, 10, 0.72);
-  backdrop-filter: blur(8px);
-  display: flex;
+  z-index: 30;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 14px;
   text-align: center;
-  padding: 20px;
+  gap: 14px;
+  background: rgba(0, 4, 10, 0.75);
+  backdrop-filter: blur(9px);
 }
 
-.start-screen h2,
 .game-over h2 {
   margin: 0;
-  font-size: 38px;
-  background: linear-gradient(135deg, #ffffff, #00f7ff, #ffd166);
+  font-size: 40px;
+  background: linear-gradient(135deg, #fff, #00f7ff, #ffd166);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.start-screen p,
 .game-over p {
   margin: 0;
-  color: #dfffff;
   font-size: 18px;
+  color: #dfffff;
 }
 
-.start-screen button,
 .game-over button,
 .controls button {
   border: none;
   border-radius: 999px;
-  padding: 15px 24px;
-  font-size: 15px;
+  padding: 15px 20px;
   font-weight: 900;
-  color: #00141d;
-  background: linear-gradient(135deg, #00f7ff, #ffffff, #ffd166);
-  box-shadow: 0 0 28px rgba(0,255,255,0.40);
+  color: #001018;
+  background: linear-gradient(135deg, #00f7ff, #fff, #ffd166);
+  box-shadow: 0 0 28px rgba(0,255,255,0.35);
   cursor: pointer;
 }
 
-.game-over {
-  display: none;
-}
-
 .controls {
-  display: flex;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   margin-top: 14px;
-}
-
-.controls button {
-  flex: 1;
 }
 
 .tip {
   text-align: center;
   color: #c9ffff;
   font-size: 14px;
-  margin: 12px 0 0;
 }
 
-/* ANIMACIONES */
-@keyframes scan {
+@keyframes starMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120px); }
+}
+
+@keyframes gridMove {
   from { background-position: 0 0; }
-  to { background-position: 120px 120px; }
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.5); }
+  to { background-position: 0 46px; }
 }
 
 @keyframes planetFloat {
-  0%, 100% { transform: translateY(0); }
+  0%,100% { transform: translateY(0); }
   50% { transform: translateY(18px); }
 }
 
-@keyframes planetFloat2 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
+@keyframes auraPulse {
+  0%,100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+  50% { transform: translateX(-50%) scale(1.08); opacity: 1; }
 }
 
-@keyframes bgMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+@keyframes boom {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(8); opacity: 0; }
 }
 
-@keyframes roadMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-80px); }
-}
-
-@keyframes roadLine {
-  from { transform: translateX(0); }
-  to { transform: translateX(-95px); }
-}
-
-@keyframes armLeftRun {
-  0%, 100% { transform: rotate(35deg); }
-  50% { transform: rotate(-45deg); }
-}
-
-@keyframes armRightRun {
-  0%, 100% { transform: rotate(-45deg); }
-  50% { transform: rotate(35deg); }
-}
-
-@keyframes legLeftRun {
-  0%, 100% { transform: rotate(-32deg); }
-  50% { transform: rotate(42deg); }
-}
-
-@keyframes legRightRun {
-  0%, 100% { transform: rotate(42deg); }
-  50% { transform: rotate(-32deg); }
-}
-
-@keyframes jumpAnim {
-  0% { bottom: 92px; }
-  45% { bottom: 245px; }
-  100% { bottom: 92px; }
-}
-
-/* RESPONSIVE CELULAR */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   body {
     padding: 10px;
   }
@@ -545,26 +437,35 @@ h1 {
   }
 
   .stats {
-    width: 100%;
     text-align: left;
-    grid-template-columns: 1fr 1fr;
   }
 
-  .game {
-    height: 470px;
+  .arena {
+    height: 500px;
   }
 
-  .runner {
-    left: 62px;
+  .enemy1 {
+    left: 25px;
   }
 
-  h1 {
-    font-size: 28px;
+  .enemy2 {
+    right: 25px;
   }
 
-  .planet-1 {
-    width: 120px;
-    height: 120px;
-    right: -20px;
+  .ceo {
+    bottom: 85px;
+  }
+
+  .fighter {
+    width: 78px;
+    transform: scale(0.9);
+  }
+
+  .ceo {
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  .controls {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
