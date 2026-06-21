@@ -1,198 +1,195 @@
-const runner = document.getElementById("runner");
-const obstacle = document.getElementById("obstacle");
-const energy = document.getElementById("energy");
-const scoreEl = document.getElementById("score");
-const levelEl = document.getElementById("level");
-const statusEl = document.getElementById("status");
-const startScreen = document.getElementById("startScreen");
-const gameOverScreen = document.getElementById("gameOver");
-const finalScoreEl = document.getElementById("finalScore");
-const starsContainer = document.getElementById("stars");
+const ceoHpEl = document.getElementById("ceoHp");
+const enemy1HpEl = document.getElementById("enemy1Hp");
+const enemy2HpEl = document.getElementById("enemy2Hp");
 
-let score = 0;
-let level = 1;
-let running = false;
-let jumping = false;
-let speed = 6;
-let obstacleX = 900;
-let energyX = 1300;
-let obstacleTimer;
-let gameLoop;
+const ceo = document.getElementById("ceo");
+const enemy1 = document.getElementById("enemy1");
+const enemy2 = document.getElementById("enemy2");
 
-function crearEstrellas() {
-  starsContainer.innerHTML = "";
+const message = document.getElementById("message");
+const effect = document.getElementById("effect");
 
-  for (let i = 0; i < 120; i++) {
-    const star = document.createElement("span");
-    star.classList.add("star");
+const gameOver = document.getElementById("gameOver");
+const resultTitle = document.getElementById("resultTitle");
+const resultText = document.getElementById("resultText");
 
-    const size = Math.random() * 2.4 + 1;
-    star.style.width = `${size}px`;
-    star.style.height = `${size}px`;
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 70}%`;
-    star.style.animationDelay = `${Math.random() * 4}s`;
-    star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+let ceoHp = 100;
+let enemy1Hp = 100;
+let enemy2Hp = 100;
+let defending = false;
+let gameEnded = false;
+let enemyLoop;
 
-    if (Math.random() > 0.75) {
-      star.style.background = "#00f7ff";
-      star.style.boxShadow = "0 0 10px rgba(0,255,255,0.9)";
-    }
+function updateUI() {
+  ceoHpEl.textContent = Math.max(0, ceoHp);
+  enemy1HpEl.textContent = Math.max(0, enemy1Hp);
+  enemy2HpEl.textContent = Math.max(0, enemy2Hp);
+}
 
-    if (Math.random() > 0.9) {
-      star.style.background = "#ffd166";
-      star.style.boxShadow = "0 0 10px rgba(255,209,102,0.9)";
-    }
+function showEffect() {
+  effect.classList.remove("show");
+  void effect.offsetWidth;
+  effect.classList.add("show");
+}
 
-    starsContainer.appendChild(star);
+function attack() {
+  if (gameEnded) return;
+
+  ceo.classList.add("attack");
+  showEffect();
+
+  const target = enemy1Hp > 0 ? enemy1 : enemy2;
+  let damage = Math.floor(Math.random() * 12) + 10;
+
+  if (target === enemy1) {
+    enemy1Hp -= damage;
+    enemy1.classList.add("hit");
+    message.textContent = `CEO golpeó a VIRUS -${damage}`;
+  } else {
+    enemy2Hp -= damage;
+    enemy2.classList.add("hit");
+    message.textContent = `CEO golpeó a DARK AI -${damage}`;
+  }
+
+  setTimeout(() => {
+    ceo.classList.remove("attack");
+    enemy1.classList.remove("hit");
+    enemy2.classList.remove("hit");
+  }, 260);
+
+  checkDefeated();
+  updateUI();
+  checkWinner();
+}
+
+function block() {
+  if (gameEnded) return;
+
+  defending = true;
+  ceo.classList.add("blocking");
+  message.textContent = "DEFENSA ACTIVADA 🛡️";
+
+  setTimeout(() => {
+    defending = false;
+    ceo.classList.remove("blocking");
+    if (!gameEnded) message.textContent = "CEO MODE ACTIVADO";
+  }, 1200);
+}
+
+function power() {
+  if (gameEnded) return;
+
+  showEffect();
+
+  const damage = Math.floor(Math.random() * 18) + 22;
+
+  if (enemy1Hp > 0) {
+    enemy1Hp -= damage;
+    enemy1.classList.add("hit");
+  }
+
+  if (enemy2Hp > 0) {
+    enemy2Hp -= damage;
+    enemy2.classList.add("hit");
+  }
+
+  message.textContent = `PODER IA golpeó a los 2 enemigos -${damage}`;
+
+  setTimeout(() => {
+    enemy1.classList.remove("hit");
+    enemy2.classList.remove("hit");
+  }, 300);
+
+  checkDefeated();
+  updateUI();
+  checkWinner();
+}
+
+function enemyAttack() {
+  if (gameEnded) return;
+
+  const aliveEnemies = [];
+  if (enemy1Hp > 0) aliveEnemies.push("VIRUS");
+  if (enemy2Hp > 0) aliveEnemies.push("DARK AI");
+
+  if (aliveEnemies.length === 0) return;
+
+  let damage = Math.floor(Math.random() * 10) + 7;
+
+  if (defending) {
+    damage = Math.floor(damage / 3);
+    message.textContent = `Bloqueaste el ataque. Daño recibido: ${damage}`;
+  } else {
+    message.textContent = `${aliveEnemies[0]} atacó al CEO -${damage}`;
+    ceo.classList.add("hit");
+    setTimeout(() => ceo.classList.remove("hit"), 250);
+  }
+
+  ceoHp -= damage;
+  updateUI();
+  checkWinner();
+}
+
+function checkDefeated() {
+  if (enemy1Hp <= 0) enemy1.classList.add("defeated");
+  if (enemy2Hp <= 0) enemy2.classList.add("defeated");
+}
+
+function checkWinner() {
+  if (ceoHp <= 0) {
+    endGame(false);
+    return;
+  }
+
+  if (enemy1Hp <= 0 && enemy2Hp <= 0) {
+    endGame(true);
   }
 }
 
-function startGame() {
-  score = 0;
-  level = 1;
-  speed = 6;
-  obstacleX = 900;
-  energyX = 1300;
-  running = true;
-  jumping = false;
+function endGame(win) {
+  gameEnded = true;
+  clearInterval(enemyLoop);
 
-  scoreEl.textContent = score;
-  levelEl.textContent = level;
-  statusEl.textContent = "CORRIENDO";
+  gameOver.style.display = "flex";
 
-  startScreen.style.display = "none";
-  gameOverScreen.style.display = "none";
-
-  obstacle.style.right = "-70px";
-  energy.style.right = "-80px";
-
-  clearInterval(gameLoop);
-
-  gameLoop = setInterval(updateGame, 20);
+  if (win) {
+    resultTitle.textContent = "VICTORIA CEO 👑";
+    resultText.textContent = "Derrotaste a los dos enemigos con poder IA.";
+  } else {
+    resultTitle.textContent = "DERROTA";
+    resultText.textContent = "El CEO cayó. Reinicia y vuelve más fuerte.";
+  }
 }
 
 function restartGame() {
-  startGame();
-}
+  ceoHp = 100;
+  enemy1Hp = 100;
+  enemy2Hp = 100;
+  defending = false;
+  gameEnded = false;
 
-function jump() {
-  if (!running || jumping) return;
+  ceo.classList.remove("hit", "attack", "blocking");
+  enemy1.classList.remove("hit", "defeated");
+  enemy2.classList.remove("hit", "defeated");
 
-  jumping = true;
-  runner.classList.add("jump");
+  gameOver.style.display = "none";
+  message.textContent = "CEO MODE ACTIVADO";
 
-  setTimeout(() => {
-    runner.classList.remove("jump");
-    jumping = false;
-  }, 720);
-}
+  updateUI();
 
-function boost() {
-  if (!running) return;
-
-  statusEl.textContent = "BOOST IA";
-  speed += 2;
-
-  setTimeout(() => {
-    speed -= 2;
-    statusEl.textContent = "CORRIENDO";
-  }, 1600);
-}
-
-function updateGame() {
-  if (!running) return;
-
-  score += 1;
-
-  if (score % 500 === 0) {
-    level += 1;
-    speed += 0.8;
-    levelEl.textContent = level;
-  }
-
-  scoreEl.textContent = score;
-
-  obstacleX -= speed;
-  energyX -= speed * 0.9;
-
-  if (obstacleX < -80) {
-    obstacleX = 900 + Math.random() * 450;
-  }
-
-  if (energyX < -80) {
-    energyX = 1200 + Math.random() * 700;
-  }
-
-  obstacle.style.right = `${900 - obstacleX}px`;
-  energy.style.right = `${900 - energyX}px`;
-
-  checkCollision();
-  checkEnergy();
-}
-
-function checkCollision() {
-  const runnerRect = runner.getBoundingClientRect();
-  const obstacleRect = obstacle.getBoundingClientRect();
-
-  const hit =
-    runnerRect.left < obstacleRect.right - 10 &&
-    runnerRect.right > obstacleRect.left + 10 &&
-    runnerRect.bottom > obstacleRect.top + 10 &&
-    runnerRect.top < obstacleRect.bottom - 10;
-
-  if (hit && !jumping) {
-    endGame();
-  }
-}
-
-function checkEnergy() {
-  const runnerRect = runner.getBoundingClientRect();
-  const energyRect = energy.getBoundingClientRect();
-
-  const collected =
-    runnerRect.left < energyRect.right &&
-    runnerRect.right > energyRect.left &&
-    runnerRect.bottom > energyRect.top &&
-    runnerRect.top < energyRect.bottom;
-
-  if (collected) {
-    score += 150;
-    statusEl.textContent = "ENERGÍA +150";
-    energyX = 1400 + Math.random() * 600;
-
-    setTimeout(() => {
-      if (running) statusEl.textContent = "CORRIENDO";
-    }, 900);
-  }
-}
-
-function endGame() {
-  running = false;
-  clearInterval(gameLoop);
-
-  statusEl.textContent = "CAÍSTE";
-  finalScoreEl.textContent = score;
-  gameOverScreen.style.display = "flex";
+  clearInterval(enemyLoop);
+  enemyLoop = setInterval(enemyAttack, 1500);
 }
 
 document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" || e.code === "ArrowUp") {
-    jump();
-  }
+  const key = e.key.toLowerCase();
 
-  if (e.code === "KeyE") {
-    boost();
-  }
-});
-
-document.addEventListener("touchstart", (e) => {
-  const target = e.target.tagName.toLowerCase();
-  if (target !== "button" && running) {
-    jump();
-  }
+  if (key === "a") attack();
+  if (key === "s") block();
+  if (key === "d") power();
 });
 
 window.addEventListener("load", () => {
-  crearEstrellas();
+  updateUI();
+  enemyLoop = setInterval(enemyAttack, 1500);
 });
