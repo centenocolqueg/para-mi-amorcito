@@ -11,15 +11,18 @@
   <div class="futuro">
     <div class="grid"></div>
     <div class="estrellas"></div>
+    <div class="nebulosa nebulosa-1"></div>
+    <div class="nebulosa nebulosa-2"></div>
     <div class="rayo"></div>
 
-    <div class="holo-planeta planeta-a"></div>
-    <div class="holo-planeta planeta-b"></div>
-    <div class="holo-planeta planeta-c"></div>
+    <div class="planeta-real planeta-grande"></div>
+    <div class="planeta-real planeta-mediano"></div>
+    <div class="planeta-real planeta-pequeno"></div>
 
     <div class="chip chip-1">AI</div>
     <div class="chip chip-2">API</div>
     <div class="chip chip-3">CEO</div>
+    <div class="chip chip-4">SYSTEM</div>
   </div>
 
   <main class="card">
@@ -49,7 +52,17 @@
       CENTENO AI es mi camino. Cada línea de código me acerca a mi versión más poderosa.
     </p>
 
-    <button onclick="mostrarSorpresa()">Activar IA del futuro ⚡</button>
+    <div class="zona-botones">
+      <button class="boton-principal" onclick="mostrarSorpresa('ia')">
+        Activar IA del futuro ⚡
+      </button>
+
+      <div class="botones-secundarios">
+        <button onclick="mostrarSorpresa('ceo')">🚀 Modo CEO</button>
+        <button onclick="mostrarSorpresa('sistema')">🧠 Sistema IA</button>
+        <button onclick="mostrarSorpresa('universo')">🌌 Universo Tech</button>
+      </div>
+    </div>
 
     <div id="sorpresa" class="sorpresa"></div>
   </main>
