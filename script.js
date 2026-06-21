@@ -1,82 +1,198 @@
-function crearVideo(titulo, linea2, linea3, linea4, linea5, linea6, linea7) {
-  const sorpresa = document.getElementById("sorpresa");
+const runner = document.getElementById("runner");
+const obstacle = document.getElementById("obstacle");
+const energy = document.getElementById("energy");
+const scoreEl = document.getElementById("score");
+const levelEl = document.getElementById("level");
+const statusEl = document.getElementById("status");
+const startScreen = document.getElementById("startScreen");
+const gameOverScreen = document.getElementById("gameOver");
+const finalScoreEl = document.getElementById("finalScore");
+const starsContainer = document.getElementById("stars");
 
-  sorpresa.innerHTML = `
-    <div class="video-ai">
-      <div class="barra-video"></div>
+let score = 0;
+let level = 1;
+let running = false;
+let jumping = false;
+let speed = 6;
+let obstacleX = 900;
+let energyX = 1300;
+let obstacleTimer;
+let gameLoop;
 
-      <div class="mini-planeta p1"></div>
-      <div class="mini-planeta p2"></div>
-      <div class="mini-planeta p3"></div>
+function crearEstrellas() {
+  starsContainer.innerHTML = "";
 
-      <div class="hud hud-1">SYSTEM ONLINE</div>
-      <div class="hud hud-2">CENTENO AI</div>
-      <div class="hud hud-3">CEO MODE</div>
+  for (let i = 0; i < 120; i++) {
+    const star = document.createElement("span");
+    star.classList.add("star");
 
-      <div class="escena escena1">${titulo}</div>
-      <div class="escena escena2">${linea2}</div>
-      <div class="escena escena3">${linea3}</div>
-      <div class="escena escena4">${linea4}</div>
-      <div class="escena escena5">${linea5}</div>
-      <div class="escena escena6">${linea6}</div>
-      <div class="escena escena7">${linea7}</div>
-    </div>
-  `;
+    const size = Math.random() * 2.4 + 1;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 70}%`;
+    star.style.animationDelay = `${Math.random() * 4}s`;
+    star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+    if (Math.random() > 0.75) {
+      star.style.background = "#00f7ff";
+      star.style.boxShadow = "0 0 10px rgba(0,255,255,0.9)";
+    }
+
+    if (Math.random() > 0.9) {
+      star.style.background = "#ffd166";
+      star.style.boxShadow = "0 0 10px rgba(255,209,102,0.9)";
+    }
+
+    starsContainer.appendChild(star);
+  }
 }
 
-function mostrarSorpresa(tipo) {
-  if (tipo === "ceo") {
-    crearVideo(
-      "🚀 MODO CEO ACTIVADO 🚀",
-      "Guido Americo Centeno Colque<br>fundador en construcción.",
-      "No persigo atención.<br>Construyo autoridad.",
-      "Mi disciplina será mi ventaja.<br>Mi visión será mi camino.",
-      "Trabajo. Código. Negocios.<br>Presencia. Control. Futuro.",
-      "No nací para rogar.<br>Nací para crear y liderar.",
-      "CEO DE MI PROPIA VIDA<br>AMERICO AI 👑"
-    );
-    return;
-  }
+function startGame() {
+  score = 0;
+  level = 1;
+  speed = 6;
+  obstacleX = 900;
+  energyX = 1300;
+  running = true;
+  jumping = false;
 
-  if (tipo === "sistema") {
-    crearVideo(
-      "🧠 SISTEMA IA ACTIVADO 🧠",
-      "Núcleo neural conectado.<br>Procesando visión del fundador.",
-      "APIs. Automatización.<br>Modelos. Datos. Seguridad.",
-      "CENTENO AI será mi sistema,<br>mi marca y mi tecnología.",
-      "Cada línea de código<br>me acerca a mi imperio.",
-      "Mi mente diseña soluciones.<br>Mi futuro se construye en silencio.",
-      "INTELIGENCIA ARTIFICIAL<br>BAJO MI VISIÓN ⚡"
-    );
-    return;
-  }
+  scoreEl.textContent = score;
+  levelEl.textContent = level;
+  statusEl.textContent = "CORRIENDO";
 
-  if (tipo === "universo") {
-    crearVideo(
-      "🌌 UNIVERSO TECH ACTIVADO 🌌",
-      "Planetas, sistemas y tecnología<br>orbitan alrededor de mi visión.",
-      "No miro pequeño.<br>Pienso como fundador.",
-      "Mi marca no será común.<br>Será diferente, fuerte y futurista.",
-      "CENTENO AI será mi camino<br>hacia libertad y crecimiento.",
-      "El mundo cambia con tecnología.<br>Yo también voy a cambiar mi vida.",
-      "GUIDO AMERICO<br>FUNDADOR EN ASCENSO 🚀"
-    );
-    return;
-  }
+  startScreen.style.display = "none";
+  gameOverScreen.style.display = "none";
 
-  crearVideo(
-    "⚡ IA DEL FUTURO ACTIVADA ⚡",
-    "Guido Americo Centeno Colque<br>fundador de una nueva era tecnológica.",
-    "No persigo atención.<br>Construyo sistemas inteligentes.",
-    "CENTENO AI será mi marca,<br>mi visión y mi tecnología avanzada 🚀",
-    "Hologramas. APIs. Automatización.<br>Inteligencia artificial. Código. Disciplina.",
-    "Mi mente ya no vive en el pasado.<br>Mi mente diseña tecnología del futuro.",
-    "CEO DE MI PROPIA VIDA<br>AMERICO AI ⚡👑"
-  );
+  obstacle.style.right = "-70px";
+  energy.style.right = "-80px";
+
+  clearInterval(gameLoop);
+
+  gameLoop = setInterval(updateGame, 20);
 }
+
+function restartGame() {
+  startGame();
+}
+
+function jump() {
+  if (!running || jumping) return;
+
+  jumping = true;
+  runner.classList.add("jump");
+
+  setTimeout(() => {
+    runner.classList.remove("jump");
+    jumping = false;
+  }, 720);
+}
+
+function boost() {
+  if (!running) return;
+
+  statusEl.textContent = "BOOST IA";
+  speed += 2;
+
+  setTimeout(() => {
+    speed -= 2;
+    statusEl.textContent = "CORRIENDO";
+  }, 1600);
+}
+
+function updateGame() {
+  if (!running) return;
+
+  score += 1;
+
+  if (score % 500 === 0) {
+    level += 1;
+    speed += 0.8;
+    levelEl.textContent = level;
+  }
+
+  scoreEl.textContent = score;
+
+  obstacleX -= speed;
+  energyX -= speed * 0.9;
+
+  if (obstacleX < -80) {
+    obstacleX = 900 + Math.random() * 450;
+  }
+
+  if (energyX < -80) {
+    energyX = 1200 + Math.random() * 700;
+  }
+
+  obstacle.style.right = `${900 - obstacleX}px`;
+  energy.style.right = `${900 - energyX}px`;
+
+  checkCollision();
+  checkEnergy();
+}
+
+function checkCollision() {
+  const runnerRect = runner.getBoundingClientRect();
+  const obstacleRect = obstacle.getBoundingClientRect();
+
+  const hit =
+    runnerRect.left < obstacleRect.right - 10 &&
+    runnerRect.right > obstacleRect.left + 10 &&
+    runnerRect.bottom > obstacleRect.top + 10 &&
+    runnerRect.top < obstacleRect.bottom - 10;
+
+  if (hit && !jumping) {
+    endGame();
+  }
+}
+
+function checkEnergy() {
+  const runnerRect = runner.getBoundingClientRect();
+  const energyRect = energy.getBoundingClientRect();
+
+  const collected =
+    runnerRect.left < energyRect.right &&
+    runnerRect.right > energyRect.left &&
+    runnerRect.bottom > energyRect.top &&
+    runnerRect.top < energyRect.bottom;
+
+  if (collected) {
+    score += 150;
+    statusEl.textContent = "ENERGÍA +150";
+    energyX = 1400 + Math.random() * 600;
+
+    setTimeout(() => {
+      if (running) statusEl.textContent = "CORRIENDO";
+    }, 900);
+  }
+}
+
+function endGame() {
+  running = false;
+  clearInterval(gameLoop);
+
+  statusEl.textContent = "CAÍSTE";
+  finalScoreEl.textContent = score;
+  gameOverScreen.style.display = "flex";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" || e.code === "ArrowUp") {
+    jump();
+  }
+
+  if (e.code === "KeyE") {
+    boost();
+  }
+});
+
+document.addEventListener("touchstart", (e) => {
+  const target = e.target.tagName.toLowerCase();
+  if (target !== "button" && running) {
+    jump();
+  }
+});
 
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    mostrarSorpresa("ia");
-  }, 1200);
+  crearEstrellas();
 });
