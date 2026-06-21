@@ -3,69 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guido Americo | CEO IA Futuro</title>
+  <title>CENTENO RUN | CEO MODE</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="futuro">
-    <div class="grid"></div>
-    <div class="estrellas"></div>
-    <div class="nebulosa nebulosa-1"></div>
-    <div class="nebulosa nebulosa-2"></div>
-    <div class="rayo"></div>
+  <div class="game-wrapper">
+    <div class="top-panel">
+      <div>
+        <p class="mini">CENTENO AI GAME</p>
+        <h1>CENTENO RUN</h1>
+      </div>
 
-    <div class="planeta-real planeta-grande"></div>
-    <div class="planeta-real planeta-mediano"></div>
-    <div class="planeta-real planeta-pequeno"></div>
-
-    <div class="chip chip-1">AI</div>
-    <div class="chip chip-2">API</div>
-    <div class="chip chip-3">CEO</div>
-    <div class="chip chip-4">SYSTEM</div>
-  </div>
-
-  <main class="card">
-    <div class="nucleo-ai">AI</div>
-
-    <p class="mini">Inteligencia Artificial • Tecnología Avanzada • Fundador</p>
-
-    <h1>Guido Americo<br>Centeno Colque</h1>
-
-    <div class="nombre-marco">
-      <span class="corona">👑</span>
-      <div class="nombre-ultra">CEO</div>
-      <div class="apellido-ultra">CENTENO AI</div>
-      <p class="frase-nombre">Construyendo tecnología del futuro desde cero 🚀</p>
-    </div>
-
-    <p class="frase">
-      “No nací para rogar atención. Nací para crear sistemas, liderar visión y construir mi imperio.”
-    </p>
-
-    <p class="mensaje">
-      Mi mente se enfoca en programación, inteligencia artificial, APIs,
-      automatización, negocios y disciplina.
-    </p>
-
-    <p class="mensaje">
-      CENTENO AI es mi camino. Cada línea de código me acerca a mi versión más poderosa.
-    </p>
-
-    <div class="zona-botones">
-      <button class="boton-principal" onclick="mostrarSorpresa('ia')">
-        Activar IA del futuro ⚡
-      </button>
-
-      <div class="botones-secundarios">
-        <button onclick="mostrarSorpresa('ceo')">🚀 Modo CEO</button>
-        <button onclick="mostrarSorpresa('sistema')">🧠 Sistema IA</button>
-        <button onclick="mostrarSorpresa('universo')">🌌 Universo Tech</button>
+      <div class="stats">
+        <div>Puntos: <span id="score">0</span></div>
+        <div>Nivel: <span id="level">1</span></div>
+        <div>Estado: <span id="status">LISTO</span></div>
       </div>
     </div>
 
-    <div id="sorpresa" class="sorpresa"></div>
-  </main>
+    <div class="game" id="game">
+      <div class="sky-glow"></div>
+      <div class="stars" id="stars"></div>
+
+      <div class="planet planet-1"></div>
+      <div class="planet planet-2"></div>
+
+      <div class="mountains mountains-back"></div>
+      <div class="mountains mountains-front"></div>
+
+      <div class="city city-1"></div>
+      <div class="city city-2"></div>
+
+      <div class="runner" id="runner">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="glow-core"></div>
+      </div>
+
+      <div class="obstacle" id="obstacle"></div>
+      <div class="energy" id="energy">⚡</div>
+
+      <div class="ground">
+        <div class="road-line"></div>
+      </div>
+
+      <div class="start-screen" id="startScreen">
+        <h2>CEO MODE</h2>
+        <p>Corre, salta obstáculos y recoge energía IA.</p>
+        <button onclick="startGame()">INICIAR JUEGO 🚀</button>
+      </div>
+
+      <div class="game-over" id="gameOver">
+        <h2>GAME OVER</h2>
+        <p>Puntaje final: <span id="finalScore">0</span></p>
+        <button onclick="restartGame()">REINICIAR ⚡</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="jump()">SALTAR ⬆️</button>
+      <button onclick="boost()">ENERGÍA IA ⚡</button>
+    </div>
+
+    <p class="tip">
+      En laptop: presiona <b>ESPACIO</b> para saltar. En celular: toca <b>SALTAR</b>.
+    </p>
+  </div>
 
   <script src="script.js"></script>
 </body>
