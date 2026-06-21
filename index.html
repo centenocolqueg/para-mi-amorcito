@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CENTENO RUN | CEO MODE</title>
+  <title>CENTENO FIGHT | CEO MODE</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,66 +12,75 @@
     <div class="top-panel">
       <div>
         <p class="mini">CENTENO AI GAME</p>
-        <h1>CENTENO RUN</h1>
+        <h1>CENTENO FIGHT</h1>
       </div>
 
       <div class="stats">
-        <div>Puntos: <span id="score">0</span></div>
-        <div>Nivel: <span id="level">1</span></div>
-        <div>Estado: <span id="status">LISTO</span></div>
+        <div>CEO Vida: <span id="ceoHp">100</span></div>
+        <div>Enemigo 1: <span id="enemy1Hp">100</span></div>
+        <div>Enemigo 2: <span id="enemy2Hp">100</span></div>
       </div>
     </div>
 
-    <div class="game" id="game">
-      <div class="sky-glow"></div>
-      <div class="stars" id="stars"></div>
+    <div class="arena">
+      <div class="stars"></div>
+      <div class="grid"></div>
+      <div class="planet"></div>
 
-      <div class="planet planet-1"></div>
-      <div class="planet planet-2"></div>
-
-      <div class="mountains mountains-back"></div>
-      <div class="mountains mountains-front"></div>
-
-      <div class="city city-1"></div>
-      <div class="city city-2"></div>
-
-      <div class="runner" id="runner">
+      <div class="fighter enemy enemy1" id="enemy1">
         <div class="head"></div>
         <div class="body"></div>
         <div class="arm arm-left"></div>
         <div class="arm arm-right"></div>
         <div class="leg leg-left"></div>
         <div class="leg leg-right"></div>
-        <div class="glow-core"></div>
+        <div class="name">VIRUS</div>
       </div>
 
-      <div class="obstacle" id="obstacle"></div>
-      <div class="energy" id="energy">⚡</div>
-
-      <div class="ground">
-        <div class="road-line"></div>
+      <div class="fighter ceo" id="ceo">
+        <div class="aura"></div>
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="core"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="name">CEO</div>
       </div>
 
-      <div class="start-screen" id="startScreen">
-        <h2>CEO MODE</h2>
-        <p>Corre, salta obstáculos y recoge energía IA.</p>
-        <button onclick="startGame()">INICIAR JUEGO 🚀</button>
+      <div class="fighter enemy enemy2" id="enemy2">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="name">DARK AI</div>
+      </div>
+
+      <div class="effect" id="effect"></div>
+
+      <div class="message" id="message">
+        CEO MODE ACTIVADO
       </div>
 
       <div class="game-over" id="gameOver">
-        <h2>GAME OVER</h2>
-        <p>Puntaje final: <span id="finalScore">0</span></p>
-        <button onclick="restartGame()">REINICIAR ⚡</button>
+        <h2 id="resultTitle">VICTORIA</h2>
+        <p id="resultText">Ganaste la pelea.</p>
+        <button onclick="restartGame()">REINICIAR 🔁</button>
       </div>
     </div>
 
     <div class="controls">
-      <button onclick="jump()">SALTAR ⬆️</button>
-      <button onclick="boost()">ENERGÍA IA ⚡</button>
+      <button onclick="attack()">👊 Golpe</button>
+      <button onclick="block()">🛡️ Defensa</button>
+      <button onclick="power()">⚡ Poder IA</button>
+      <button onclick="restartGame()">🔁 Reiniciar</button>
     </div>
 
     <p class="tip">
-      En laptop: presiona <b>ESPACIO</b> para saltar. En celular: toca <b>SALTAR</b>.
+      Teclas: <b>A</b> golpe, <b>S</b> defensa, <b>D</b> poder IA.
     </p>
   </div>
 
